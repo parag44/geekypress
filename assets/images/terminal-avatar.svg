@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#071722"/>
+      <stop offset="50%" stop-color="#050e16"/>
+      <stop offset="100%" stop-color="#03090e"/>
+    </linearGradient>
+
+    <!-- Matrix Glow -->
+    <linearGradient id="greenGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#39ff88" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#39ff88" stop-opacity="0.2"/>
+    </linearGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#39ff88" stroke-width="0.75" stroke-opacity="0.08"/>
+    </pattern>
+
+    <!-- Headphone Arc -->
+    <linearGradient id="cyanGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#49d9ff" stop-opacity="0.7"/>
+      <stop offset="50%" stop-color="#39ff88" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#49d9ff" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="800" height="1000" fill="url(#bgGrad)"/>
+  <rect width="800" height="1000" fill="url(#grid)"/>
+
+  <!-- Subtle Corner Reticles -->
+  <path d="M 40 80 L 40 40 L 80 40" fill="none" stroke="#39ff88" stroke-width="2" stroke-opacity="0.4"/>
+  <path d="M 760 80 L 760 40 L 720 40" fill="none" stroke="#39ff88" stroke-width="2" stroke-opacity="0.4"/>
+  <path d="M 40 920 L 40 960 L 80 960" fill="none" stroke="#39ff88" stroke-width="2" stroke-opacity="0.4"/>
+  <path d="M 760 920 L 760 960 L 720 960" fill="none" stroke="#39ff88" stroke-width="2" stroke-opacity="0.4"/>
+
+  <!-- Decorative Binary Streams in background -->
+  <g fill="#39ff88" opacity="0.12" font-family="monospace" font-size="14" letter-spacing="4">
+    <text x="70" y="140">01000100 01000101 01010110</text>
+    <text x="70" y="180">01010000 01010010 01001111</text>
+    <text x="70" y="220">&gt;_ READY FOR TRANSMISSION</text>
+    <text x="520" y="140">BUILD: v1.0.1</text>
+    <text x="520" y="180">STATUS: 200_OK</text>
+    <text x="520" y="220">AUTH: LOCAL_HOST</text>
+  </g>
+
+  <!-- Ambient Silhouette Glow -->
+  <circle cx="400" cy="460" r="260" fill="#39ff88" opacity="0.06"/>
+
+  <!-- Developer Silhouette -->
+  <!-- Shoulders & Torso -->
+  <path d="M 170 960 C 180 820, 230 760, 310 730 L 330 650 C 350 660, 450 660, 470 650 L 490 730 C 570 760, 620 820, 630 960 Z" fill="#081d29" stroke="#39ff88" stroke-width="2" stroke-opacity="0.35"/>
+  <!-- Hoodie details -->
+  <path d="M 330 650 L 360 840 L 400 960 L 440 840 L 470 650" fill="none" stroke="#39ff88" stroke-width="1.5" stroke-opacity="0.3"/>
+  <path d="M 380 720 L 420 720" stroke="#49d9ff" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- Neck -->
+  <path d="M 350 560 L 350 660 L 450 660 L 450 560 Z" fill="#0c2331"/>
+
+  <!-- Head Base -->
+  <ellipse cx="400" cy="460" rx="140" ry="170" fill="#091f2c" stroke="#39ff88" stroke-width="2" stroke-opacity="0.4"/>
+
+  <!-- Sleek Coding Glasses / Terminal Visor -->
+  <g>
+    <!-- Left Lens -->
+    <rect x="290" y="420" width="95" height="50" rx="6" fill="#05131c" stroke="#39ff88" stroke-width="2.5"/>
+    <line x1="300" y1="445" x2="375" y2="445" stroke="#39ff88" stroke-width="1.5" stroke-opacity="0.6"/>
+    <!-- Right Lens -->
+    <rect x="415" y="420" width="95" height="50" rx="6" fill="#05131c" stroke="#39ff88" stroke-width="2.5"/>
+    <line x1="425" y1="445" x2="500" y2="445" stroke="#39ff88" stroke-width="1.5" stroke-opacity="0.6"/>
+    <!-- Bridge -->
+    <line x1="385" y1="440" x2="415" y2="440" stroke="#39ff88" stroke-width="3"/>
+    <!-- Glare reflection -->
+    <path d="M 310 430 L 335 430 L 320 460 L 295 460 Z" fill="#49d9ff" opacity="0.35"/>
+    <path d="M 435 430 L 460 430 L 445 460 L 420 460 Z" fill="#49d9ff" opacity="0.35"/>
+  </g>
+
+  <!-- Over-Ear Studio Headphones -->
+  <!-- Headband -->
+  <path d="M 230 450 C 230 260, 570 260, 570 450" fill="none" stroke="url(#cyanGlow)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Left Ear Cup -->
+  <rect x="220" y="410" width="44" height="90" rx="16" fill="#071924" stroke="#49d9ff" stroke-width="2.5"/>
+  <ellipse cx="242" cy="455" rx="12" ry="26" fill="#39ff88" opacity="0.4"/>
+  <!-- Right Ear Cup -->
+  <rect x="536" y="410" width="44" height="90" rx="16" fill="#071924" stroke="#49d9ff" stroke-width="2.5"/>
+  <ellipse cx="558" cy="455" rx="12" ry="26" fill="#39ff88" opacity="0.4"/>
+
+  <!-- Code Bracket Floating Badges -->
+  <g fill="#39ff88" font-family="monospace" font-weight="bold" font-size="44" opacity="0.8">
+    <text x="140" y="520">&lt;</text>
+    <text x="630" y="520">&gt;</text>
+  </g>
+
+  <!-- Bottom Scanline Overlay -->
+  <rect x="100" y="850" width="600" height="3" fill="#39ff88" opacity="0.4"/>
+  <text x="400" y="890" fill="#39ff88" font-family="monospace" font-size="16" font-weight="600" text-anchor="middle" letter-spacing="6" opacity="0.75">&gt;_ DEVELOPER PROFILE</text>
+</svg>

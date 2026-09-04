@@ -1,0 +1,772 @@
+# Copyright (C) 2026 Parag Das
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: GeekyPress 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/geekypress\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-09-03T10:26:07+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: geekypress\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "GeekyPress"
+msgstr ""
+
+#. Theme URI of the theme
+#: style.css
+msgid "https://github.com/parag44/geekypress"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "A modern, programmer-focused portfolio theme featuring interactive terminal aesthetics, native Customizer controls, Google Fonts typography, and developer ligatures."
+msgstr ""
+
+#. Author of the theme
+#: style.css
+msgid "Parag Das"
+msgstr ""
+
+#. Author URI of the theme
+#: style.css
+msgid "https://profiles.wordpress.org/parag44/"
+msgstr ""
+
+#: 404.php:20
+msgid "Route Not Found"
+msgstr ""
+
+#: 404.php:23
+msgid "The requested URL or resource does not exist in the current namespace."
+msgstr ""
+
+#: 404.php:27
+msgid "Return Home"
+msgstr ""
+
+#: archive.php:44
+#: single.php:61
+msgid "Previous"
+msgstr ""
+
+#: archive.php:45
+#: single.php:62
+msgid "Next"
+msgstr ""
+
+#: archive.php:52
+msgid "No entries found in this archive."
+msgstr ""
+
+#. translators: 1: title.
+#: comments.php:26
+#, php-format
+msgid "One thought on &ldquo;%1$s&rdquo;"
+msgstr ""
+
+#. translators: 1: comment count number, 2: title.
+#: comments.php:32
+#, php-format
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:61
+msgid "// Comments are closed."
+msgstr ""
+
+#: footer.php:27
+msgid "Back to top"
+msgstr ""
+
+#: functions.php:84
+#: header.php:46
+msgid "Primary Navigation"
+msgstr ""
+
+#: functions.php:225
+msgid "Sidebar"
+msgstr ""
+
+#: functions.php:227
+msgid "Add widgets here to appear in your sidebar."
+msgstr ""
+
+#: functions.php:247
+msgid "A modern, developer-focused portfolio theme featuring interactive terminal aesthetics, customizable showcase sections, and Google Fonts."
+msgstr ""
+
+#: functions.php:350
+msgid "Loading portfolio"
+msgstr ""
+
+#: functions.php:358
+msgid "Hello, I’m"
+msgstr ""
+
+#: functions.php:359
+msgid "Booting the portfolio. Good code takes a moment to compile."
+msgstr ""
+
+#. translators: %d: number of seconds until portfolio is ready.
+#: functions.php:364
+#, php-format
+msgid "portfolio ready in %d second"
+msgid_plural "portfolio ready in %d seconds"
+msgstr[0] ""
+msgstr[1] ""
+
+#: functions.php:368
+msgid "Built with caffeine, curiosity & clean commits."
+msgstr ""
+
+#: header.php:38
+msgid "Open Navigation Menu"
+msgstr ""
+
+#: header.php:49
+msgid "Close Navigation Menu"
+msgstr ""
+
+#: inc/customizer.php:27
+msgid "GeekyPress Settings"
+msgstr ""
+
+#: inc/customizer.php:28
+msgid "Customize your developer portfolio sections, terminal profile, projects, skills, and layout live."
+msgstr ""
+
+#: inc/customizer/sections/about.php:15
+#: inc/helpers.php:50
+msgid "About Me"
+msgstr ""
+
+#: inc/customizer/sections/about.php:33
+msgid "Enable About Section"
+msgstr ""
+
+#: inc/customizer/sections/about.php:51
+#: inc/customizer/sections/contact.php:51
+#: inc/customizer/sections/cta.php:51
+#: inc/customizer/sections/experience.php:51
+#: inc/customizer/sections/interests.php:51
+#: inc/customizer/sections/projects.php:51
+#: inc/customizer/sections/skills.php:51
+msgid "Section Label"
+msgstr ""
+
+#: inc/customizer/sections/about.php:69
+msgid "Section Heading"
+msgstr ""
+
+#: inc/customizer/sections/about.php:70
+msgid "Use newlines for breaks"
+msgstr ""
+
+#: inc/customizer/sections/about.php:88
+msgid "Biography Paragraph 1"
+msgstr ""
+
+#: inc/customizer/sections/about.php:106
+msgid "Biography Paragraph 2"
+msgstr ""
+
+#: inc/customizer/sections/about.php:124
+msgid "Biography Paragraph 3"
+msgstr ""
+
+#: inc/customizer/sections/about.php:142
+msgid "Signature"
+msgstr ""
+
+#: inc/customizer/sections/about.php:171
+msgid "Stat / Feature Highlights"
+msgstr ""
+
+#: inc/customizer/sections/about.php:172
+msgid "The 2x2 highlight grid on the right with Dashicons"
+msgstr ""
+
+#: inc/customizer/sections/about.php:176
+msgid "Add Highlight Box"
+msgstr ""
+
+#: inc/customizer/sections/about.php:178
+msgid "Title"
+msgstr ""
+
+#: inc/customizer/sections/about.php:179
+msgid "Description / Subtitle"
+msgstr ""
+
+#: inc/customizer/sections/about.php:180
+msgid "Dashicon class (e.g. dashicons-admin-tools, dashicons-wordpress, dashicons-groups, dashicons-performance)"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:15
+#: inc/helpers.php:55
+msgid "Contact & Socials"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:33
+msgid "Enable Contact Section"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:69
+#: inc/customizer/sections/experience.php:69
+#: inc/customizer/sections/interests.php:69
+#: inc/customizer/sections/projects.php:69
+#: inc/customizer/sections/skills.php:69
+msgid "Section Title"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:87
+msgid "Email Address"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:105
+msgid "Phone Number"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:123
+msgid "Location Text"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:152
+msgid "Social Links"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:153
+msgid "Buttons at the bottom of the contact card"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:157
+#: inc/customizer/sections/hero.php:230
+msgid "Add Social Link"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:159
+msgid "Link Label (e.g. LinkedIn ↗)"
+msgstr ""
+
+#: inc/customizer/sections/contact.php:160
+msgid "Link URL"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:15
+msgid "Call to Action (CTA)"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:33
+msgid "Enable CTA Section"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:69
+msgid "Headline Prefix"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:87
+msgid "Highlighted Keyword (in Green)"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:105
+msgid "Headline Suffix"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:123
+#: inc/customizer/sections/interests.php:123
+#: inc/customizer/sections/projects.php:140
+msgid "Description"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:141
+msgid "Button Text"
+msgstr ""
+
+#: inc/customizer/sections/cta.php:159
+msgid "Button URL (or mailto:)"
+msgstr ""
+
+#: inc/customizer/sections/design.php:15
+msgid "Colors & Theme Style"
+msgstr ""
+
+#: inc/customizer/sections/design.php:35
+msgid "Terminal Accent Green"
+msgstr ""
+
+#: inc/customizer/sections/design.php:36
+msgid "Primary glow color for prompts, borders, and buttons"
+msgstr ""
+
+#: inc/customizer/sections/design.php:56
+msgid "Secondary Cyan Color"
+msgstr ""
+
+#: inc/customizer/sections/design.php:57
+msgid "Secondary highlight & link hover color"
+msgstr ""
+
+#: inc/customizer/sections/design.php:77
+msgid "Dark Background Color"
+msgstr ""
+
+#: inc/customizer/sections/design.php:97
+msgid "Card / Surface Background"
+msgstr ""
+
+#: inc/customizer/sections/design.php:117
+msgid "Headings & Text Color"
+msgstr ""
+
+#: inc/customizer/sections/design.php:137
+msgid "Body / Muted Text Color"
+msgstr ""
+
+#: inc/customizer/sections/design.php:155
+msgid "Additional Custom CSS"
+msgstr ""
+
+#: inc/customizer/sections/design.php:156
+msgid "Appended live to the document head"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:15
+#: inc/helpers.php:53
+msgid "Work Experience"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:33
+msgid "Enable Experience Section"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:115
+msgid "Timeline Experience Items"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:116
+msgid "Timeline milestones with date badge, initial mark, job role, and company"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:120
+msgid "Add Experience Milestone"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:122
+msgid "Date Range (e.g. Sep 2024 — Present)"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:123
+msgid "Badge Initial (e.g. O, JS, </>)"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:124
+msgid "Job Title"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:125
+msgid "Company Name"
+msgstr ""
+
+#: inc/customizer/sections/experience.php:126
+msgid "Job Summary / Accomplishments"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:15
+msgid "Footer & Back to Top"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:33
+msgid "Copyright Text"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:51
+msgid "Platform Credit Text"
+msgstr ""
+
+#: inc/customizer/sections/footer.php:69
+msgid "Show \"Back to Top\" Arrow"
+msgstr ""
+
+#: inc/customizer/sections/header.php:15
+msgid "Header & Navigation"
+msgstr ""
+
+#: inc/customizer/sections/header.php:33
+msgid "Brand Badge Text"
+msgstr ""
+
+#: inc/customizer/sections/header.php:34
+msgid "The terminal badge mark on the left (e.g. >_)"
+msgstr ""
+
+#: inc/customizer/sections/header.php:52
+msgid "Brand Name / Title"
+msgstr ""
+
+#: inc/customizer/sections/header.php:70
+msgid "CTA Button Text"
+msgstr ""
+
+#: inc/customizer/sections/header.php:88
+msgid "CTA Button Link URL"
+msgstr ""
+
+#: inc/customizer/sections/header.php:106
+msgid "Display CTA Button"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:15
+msgid "Hero & Terminal Profile"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:33
+msgid "Enable Hero Section"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:51
+msgid "Terminal Label / Subtitle"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:69
+msgid "Hero Title Prefix"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:87
+msgid "First Name (Highlighted)"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:88
+msgid "Rendered in terminal green highlight"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:106
+msgid "Surname / Title Suffix"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:124
+msgid "Hero Description"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:142
+msgid "Primary Button Text"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:160
+msgid "Primary Button URL"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:178
+msgid "Secondary Button Text"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:196
+msgid "Secondary Button URL"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:225
+msgid "Terminal Social Links"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:226
+msgid "Mono-letter badges below buttons (e.g. in, X, W, @)"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:232
+msgid "Badge Char / Icon (e.g. in, X, @)"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:233
+msgid "Title / Tooltip"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:234
+msgid "URL (or mailto:)"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:254
+msgid "Terminal Window Profile Photo"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:255
+msgid "Defaults to theme built-in photo if left empty."
+msgstr ""
+
+#: inc/customizer/sections/hero.php:273
+msgid "Terminal Prompt Command"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:291
+msgid "Terminal JSON Content"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:292
+msgid "Display code / JSON in the terminal window"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:310
+msgid "Status Tag Prefix"
+msgstr ""
+
+#: inc/customizer/sections/hero.php:327
+msgid "Status Tag Strong Text"
+msgstr ""
+
+#: inc/customizer/sections/interests.php:15
+#: inc/helpers.php:54
+msgid "Interests & Curiosities"
+msgstr ""
+
+#: inc/customizer/sections/interests.php:33
+msgid "Enable Interests Section"
+msgstr ""
+
+#: inc/customizer/sections/interests.php:114
+msgid "Interests List"
+msgstr ""
+
+#: inc/customizer/sections/interests.php:115
+msgid "Terminal badges with title and description"
+msgstr ""
+
+#: inc/customizer/sections/interests.php:119
+msgid "Add Interest"
+msgstr ""
+
+#: inc/customizer/sections/interests.php:121
+msgid "Badge Initial (e.g. W, >_, AI, ⌖)"
+msgstr ""
+
+#: inc/customizer/sections/interests.php:122
+msgid "Interest Title"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:15
+#: inc/helpers.php:51
+msgid "Projects & Products"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:33
+msgid "Enable Projects Section"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:130
+msgid "Project Cards"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:131
+msgid "Add, reorder, duplicate or delete portfolio projects"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:135
+msgid "Add Project Card"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:137
+msgid "Badge Initial (e.g. S, T, TA, L)"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:138
+msgid "Category / Type (e.g. WordPress Plugin)"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:139
+msgid "Project Title"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:141
+msgid "Tags (comma-separated)"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:142
+msgid "Link Text (Optional)"
+msgstr ""
+
+#: inc/customizer/sections/projects.php:143
+msgid "Link URL (Optional)"
+msgstr ""
+
+#: inc/customizer/sections/section-order.php:15
+msgid "Section Order & Visibility"
+msgstr ""
+
+#: inc/customizer/sections/section-order.php:159
+msgid "Drag to Reorder Homepage Sections"
+msgstr ""
+
+#: inc/customizer/sections/section-order.php:160
+msgid "Reorder sections or toggle checkboxes to show/hide them."
+msgstr ""
+
+#: inc/customizer/sections/skills.php:15
+#: inc/helpers.php:52
+msgid "Skills & Expertise"
+msgstr ""
+
+#: inc/customizer/sections/skills.php:33
+msgid "Enable Skills Section"
+msgstr ""
+
+#: inc/customizer/sections/skills.php:106
+msgid "Skills List"
+msgstr ""
+
+#: inc/customizer/sections/skills.php:107
+msgid "Skill badges displayed in a 4-column terminal grid"
+msgstr ""
+
+#: inc/customizer/sections/skills.php:111
+msgid "Add Skill"
+msgstr ""
+
+#: inc/customizer/sections/skills.php:113
+msgid "Skill Name"
+msgstr ""
+
+#: inc/customizer/sections/skills.php:114
+msgid "Dashicon Class (e.g. dashicons-wordpress, dashicons-editor-code, dashicons-admin-tools)"
+msgstr ""
+
+#: inc/customizer/sections/typography.php:15
+msgid "Typography & Geek Fonts"
+msgstr ""
+
+#: inc/customizer/sections/typography.php:16
+msgid "Customize developer & monospace fonts for code snippets, terminal window, headings, and body content with live Google Fonts support."
+msgstr ""
+
+#: inc/customizer/sections/typography.php:50
+msgid "Terminal & Code Font"
+msgstr ""
+
+#: inc/customizer/sections/typography.php:51
+msgid "Used for terminal commands, JSON output, titles, buttons, tags, and code blocks."
+msgstr ""
+
+#: inc/customizer/sections/typography.php:70
+msgid "Body & Content Font"
+msgstr ""
+
+#: inc/customizer/sections/typography.php:71
+msgid "Used for descriptive paragraphs, bio text, and documentation."
+msgstr ""
+
+#: inc/customizer/sections/typography.php:90
+msgid "Enable Programming Ligatures"
+msgstr ""
+
+#: inc/customizer/sections/typography.php:91
+msgid "Renders multi-character code ligatures like =>, !=, ===, </>, and -> into continuous glyphs."
+msgstr ""
+
+#: inc/helpers.php:49
+msgid "Hero & Terminal"
+msgstr ""
+
+#: inc/helpers.php:56
+msgid "Call to Action"
+msgstr ""
+
+#: page.php:38
+#: single.php:44
+msgid "Pages:"
+msgstr ""
+
+#: template-parts/sections/contact.php:55
+#: template-parts/sections/hero.php:75
+msgid "Social profiles"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Background"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Surface"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Text"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Muted"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Terminal Green"
+msgstr ""
+
+#: theme.json
+msgctxt "Color name"
+msgid "Cyan"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Geist Sans"
+msgstr ""
+
+#: theme.json
+msgctxt "Font family name"
+msgid "Geist Mono"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Extra Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Base"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Heading Small"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Heading Medium"
+msgstr ""
+
+#: theme.json
+msgctxt "Font size name"
+msgid "Heading Large"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Header"
+msgstr ""
+
+#: theme.json
+msgctxt "Template part name"
+msgid "Footer"
+msgstr ""
