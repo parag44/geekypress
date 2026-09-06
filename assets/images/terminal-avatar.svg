@@ -41,7 +41,7 @@
     <text x="70" y="140">01000100 01000101 01010110</text>
     <text x="70" y="180">01010000 01010010 01001111</text>
     <text x="70" y="220">&gt;_ READY FOR TRANSMISSION</text>
-    <text x="520" y="140">BUILD: v1.0.0</text>
+    <text x="520" y="140">BUILD: v1.0.1</text>
     <text x="520" y="180">STATUS: 200_OK</text>
     <text x="520" y="220">AUTH: LOCAL_HOST</text>
   </g>

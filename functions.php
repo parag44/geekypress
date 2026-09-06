@@ -12,21 +12,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Runs once when GeekyPress is activated.
- *
- * Sets the front page to use the theme's front-page.php template so the
- * portfolio is visible immediately on any fresh WordPress installation without
- * the user needing to configure Reading Settings manually.
- */
-function geekypress_on_activation() {
-	if ( 'posts' === get_option( 'show_on_front' ) ) {
-		update_option( 'show_on_front', 'page' );
-		update_option( 'page_on_front', 0 );
-	}
-}
-add_action( 'after_switch_theme', 'geekypress_on_activation' );
-
-/**
  * Ensures the theme front page UI renders on the root URL by default,
  * even on fresh installations where Settings > Reading has not been saved yet.
  *
@@ -112,6 +97,9 @@ function geekypress_setup() {
 		)
 	);
 
+	// Site Icon / Favicon support
+	add_theme_support( 'site-icon' );
+
 	// Register Primary Navigation Menu
 	register_nav_menus(
 		array(
@@ -120,6 +108,66 @@ function geekypress_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'geekypress_setup' );
+
+/**
+ * Ensures default theme mods (including blog slider mode) are set on theme switch/activation.
+ */
+function geekypress_set_activation_defaults() {
+	if ( false === get_theme_mod( 'geekypress_animations_enabled', false ) ) {
+		set_theme_mod( 'geekypress_animations_enabled', true );
+	}
+	if ( false === get_theme_mod( 'geekypress_blog_slider_enabled', false ) ) {
+		set_theme_mod( 'geekypress_blog_slider_enabled', true );
+	}
+	if ( false === get_theme_mod( 'geekypress_blog_per_screen', false ) ) {
+		set_theme_mod( 'geekypress_blog_per_screen', 3 );
+	}
+	if ( false === get_theme_mod( 'geekypress_blog_count', false ) ) {
+		set_theme_mod( 'geekypress_blog_count', 9 );
+	}
+}
+add_action( 'after_switch_theme', 'geekypress_set_activation_defaults' );
+
+/**
+ * Appends the has-gp-animations class to <body> when animations are enabled.
+ *
+ * @param array $classes Array of body class names.
+ * @return array
+ */
+function geekypress_animation_body_class( $classes ) {
+	if ( (bool) get_theme_mod( 'geekypress_animations_enabled', true ) ) {
+		$classes[] = 'has-gp-animations';
+	}
+	return $classes;
+}
+add_filter( 'body_class', 'geekypress_animation_body_class' );
+
+/**
+ * Ensures WebP images are allowed in the WordPress media uploader.
+ *
+ * @param array $mimes Allowed MIME types.
+ * @return array
+ */
+function geekypress_enable_webp_upload( $mimes ) {
+	$mimes['webp'] = 'image/webp';
+	return $mimes;
+}
+add_filter( 'upload_mimes', 'geekypress_enable_webp_upload' );
+
+/**
+ * Ensures WebP images are recognized as displayable images by WordPress.
+ *
+ * @param bool   $result Current displayable result.
+ * @param string $path   Path to the image file.
+ * @return bool
+ */
+function geekypress_displayable_webp( $result, $path ) {
+	if ( false === $result && 'webp' === strtolower( pathinfo( $path, PATHINFO_EXTENSION ) ) ) {
+		return true;
+	}
+	return $result;
+}
+add_filter( 'file_is_displayable_image', 'geekypress_displayable_webp', 10, 2 );
 
 /**
  * Remove the Site Editor admin menu entry.
@@ -141,61 +189,17 @@ function geekypress_block_editor_filter( $settings ) {
 }
 
 /**
- * Preconnect to Google Fonts domains.
- */
-function geekypress_google_fonts_preconnect() {
-	echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
-	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
-}
-add_action( 'wp_head', 'geekypress_google_fonts_preconnect', 2 );
-
-/**
- * Returns Google Fonts enqueue URL for current theme mods.
- *
- * @return string|false
- */
-function geekypress_get_google_fonts_url() {
-	$font_mono_key = get_theme_mod( 'geekypress_font_mono', 'fira-code' );
-	$font_body_key = get_theme_mod( 'geekypress_font_body', 'fira-code' );
-
-	$font_defs = geekypress_get_font_definitions();
-	$families  = array();
-
-	if ( ! empty( $font_defs[ $font_mono_key ]['google_name'] ) ) {
-		$families[] = $font_defs[ $font_mono_key ]['google_name'];
-	}
-	if ( ! empty( $font_defs[ $font_body_key ]['google_name'] ) && ! in_array( $font_defs[ $font_body_key ]['google_name'], $families, true ) ) {
-		$families[] = $font_defs[ $font_body_key ]['google_name'];
-	}
-
-	if ( empty( $families ) ) {
-		return false;
-	}
-
-	return 'https://fonts.googleapis.com/css2?family=' . implode( '&family=', array_map( 'rawurlencode', $families ) ) . '&display=swap';
-}
-
-/**
  * Loads front-end scripts and stylesheets.
  */
 function geekypress_enqueue_assets() {
 	$theme   = wp_get_theme();
 	$version = $theme->get( 'Version' );
 
-	// Google Fonts
-	$fonts_url = geekypress_get_google_fonts_url();
-	if ( $fonts_url ) {
-		wp_enqueue_style( 'geekypress-google-fonts', esc_url( $fonts_url ), array(), null );
-	}
-
-	// Dashicons for frontend skill & stat icons
-	wp_enqueue_style( 'dashicons' );
-
 	// Main theme styles
 	wp_enqueue_style(
 		'geekypress-style',
 		get_theme_file_uri( 'assets/css/theme.css' ),
-		array( 'dashicons' ),
+		array(),
 		$version
 	);
 
@@ -214,12 +218,35 @@ function geekypress_enqueue_assets() {
 		true
 	);
 
+	wp_localize_script(
+		'geekypress-navigation',
+		'geekypressData',
+		array(
+			'homeUrl'     => esc_url( home_url( '/' ) ),
+			'isFrontPage' => is_front_page(),
+		)
+	);
+
 	// Threaded comments reply script
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'geekypress_enqueue_assets' );
+
+/**
+ * Ensure hash anchor links in primary menu point back to homepage when not on front page.
+ *
+ * @param array $atts Link attributes.
+ * @return array
+ */
+function geekypress_filter_nav_menu_links( $atts ) {
+	if ( ! is_front_page() && ! empty( $atts['href'] ) && 0 === strpos( $atts['href'], '#' ) ) {
+		$atts['href'] = esc_url( home_url( '/' . $atts['href'] ) );
+	}
+	return $atts;
+}
+add_filter( 'nav_menu_link_attributes', 'geekypress_filter_nav_menu_links' );
 
 /**
  * Builds dynamic CSS variables from theme mods.
@@ -246,7 +273,7 @@ function geekypress_get_dynamic_css() {
 
 	$user_css = get_theme_mod( 'geekypress_custom_css', '' );
 
-	$css = ":root {\n";
+	$css = ":root, :root[data-theme-mode=\"dark\"] {\n";
 	if ( $green !== '#39ff88' )        $css .= "\t--pt-green: {$green};\n";
 	if ( $cyan !== '#49d9ff' )         $css .= "\t--pt-cyan: {$cyan};\n";
 	if ( $bg !== '#050d14' )           $css .= "\t--pt-bg: {$bg};\n";
@@ -262,6 +289,11 @@ function geekypress_get_dynamic_css() {
 	if ( $ligatures ) {
 		$css .= "\tfont-variant-ligatures: normal;\n";
 		$css .= "\tfont-feature-settings: 'calt' 1, 'liga' 1;\n";
+	}
+
+	$post_width = absint( get_theme_mod( 'geekypress_single_post_width', 860 ) );
+	if ( $post_width >= 600 && $post_width <= 1600 && 860 !== $post_width ) {
+		$css .= "\t--gp-single-post-width: {$post_width}px;\n";
 	}
 
 	$css .= "}\n";
@@ -290,21 +322,6 @@ function geekypress_widgets_init() {
 	);
 }
 add_action( 'widgets_init', 'geekypress_widgets_init' );
-
-/**
- * Adds a default homepage description when an SEO plugin is not active.
- */
-function geekypress_home_meta_description() {
-	if ( is_admin() || ! ( is_front_page() || is_home() ) ) {
-		return;
-	}
-
-	printf(
-		'<meta name="description" content="%s">' . "\n",
-		esc_attr( __( 'A modern, developer-focused portfolio theme featuring interactive terminal aesthetics, customizable showcase sections, and Google Fonts.', 'geekypress' ) )
-	);
-}
-add_action( 'wp_head', 'geekypress_home_meta_description', 2 );
 
 /**
  * Returns the saved loader settings with safe defaults.
@@ -357,13 +374,13 @@ function geekypress_enqueue_loader_script() {
 add_action( 'wp_enqueue_scripts', 'geekypress_enqueue_loader_script' );
 
 /**
- * Preloads the loader heading font to prevent a fallback-font flash.
+ * Preloads the theme's core variable fonts to optimize Core Web Vitals (FCP & CLS).
  *
  * @param array<int, array<string, string>> $preload_resources Resources to preload.
  * @return array<int, array<string, string>>
  */
-function geekypress_preload_loader_font( $preload_resources ) {
-	if ( ! geekypress_loader_is_enabled() ) {
+function geekypress_preload_theme_fonts( $preload_resources ) {
+	if ( is_admin() ) {
 		return $preload_resources;
 	}
 
@@ -374,9 +391,16 @@ function geekypress_preload_loader_font( $preload_resources ) {
 		'crossorigin' => 'anonymous',
 	);
 
+	$preload_resources[] = array(
+		'href'        => get_theme_file_uri( 'assets/fonts/Geist-Variable.woff2' ),
+		'as'          => 'font',
+		'type'        => 'font/woff2',
+		'crossorigin' => 'anonymous',
+	);
+
 	return $preload_resources;
 }
-add_filter( 'wp_preload_resources', 'geekypress_preload_loader_font' );
+add_filter( 'wp_preload_resources', 'geekypress_preload_theme_fonts' );
 
 /**
  * Adds a state class used to prevent scrolling while the loader is visible.
@@ -430,6 +454,69 @@ function geekypress_render_loader() {
 }
 add_action( 'wp_body_open', 'geekypress_render_loader', 1 );
 
-// Include Customizer and Helpers
+/**
+ * Outputs basic SEO meta tags, descriptions, keywords, and Open Graph tags in <head>.
+ */
+function geekypress_render_seo_meta() {
+	if ( is_admin() ) {
+		return;
+	}
+
+	$meta_desc = get_theme_mod( 'geekypress_seo_meta_desc', 'Full-stack software engineer portfolio showcasing web applications, open source developer tools, projects, and skills.' );
+	$keywords  = get_theme_mod( 'geekypress_seo_keywords', 'software engineer, developer portfolio, full-stack, wordpress, php, typescript, react, open source' );
+	$robots    = get_theme_mod( 'geekypress_seo_robots', 'index, follow' );
+	$og_enable = get_theme_mod( 'geekypress_seo_og_enabled', true );
+	$og_image  = get_theme_mod( 'geekypress_seo_og_image', '' );
+
+	$page_title = wp_get_document_title();
+	$canonical  = esc_url( home_url( add_query_arg( null, null ) ) );
+
+	if ( is_singular() ) {
+		global $post;
+		if ( $post && ! empty( $post->post_excerpt ) ) {
+			$meta_desc = wp_strip_all_tags( $post->post_excerpt );
+		} elseif ( $post && ! empty( $post->post_content ) ) {
+			$meta_desc = wp_trim_words( wp_strip_all_tags( $post->post_content ), 28, '...' );
+		}
+		if ( has_post_thumbnail( $post ) ) {
+			$thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post ), 'large' );
+			if ( ! empty( $thumb[0] ) ) {
+				$og_image = $thumb[0];
+			}
+		}
+		$canonical = get_permalink();
+	}
+
+	if ( ! empty( $meta_desc ) ) {
+		echo '<meta name="description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
+	}
+	if ( ! empty( $keywords ) && ( is_front_page() || is_home() ) ) {
+		echo '<meta name="keywords" content="' . esc_attr( $keywords ) . '">' . "\n";
+	}
+	if ( ! empty( $robots ) ) {
+		echo '<meta name="robots" content="' . esc_attr( $robots ) . '">' . "\n";
+	}
+
+	if ( $og_enable ) {
+		$og_type = is_singular( 'post' ) ? 'article' : 'website';
+		echo '<meta property="og:site_name" content="' . esc_attr( get_bloginfo( 'name' ) ) . '">' . "\n";
+		echo '<meta property="og:title" content="' . esc_attr( $page_title ) . '">' . "\n";
+		echo '<meta property="og:description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
+		echo '<meta property="og:type" content="' . esc_attr( $og_type ) . '">' . "\n";
+		echo '<meta property="og:url" content="' . esc_url( $canonical ) . '">' . "\n";
+		if ( ! empty( $og_image ) ) {
+			echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
+			echo '<meta name="twitter:image" content="' . esc_url( $og_image ) . '">' . "\n";
+		}
+		echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+		echo '<meta name="twitter:title" content="' . esc_attr( $page_title ) . '">' . "\n";
+		echo '<meta name="twitter:description" content="' . esc_attr( $meta_desc ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'geekypress_render_seo_meta', 1 );
+
+// Include Icons, Helpers and Customizer
+require_once get_template_directory() . '/inc/icons.php';
 require_once get_template_directory() . '/inc/helpers.php';
 require_once get_template_directory() . '/inc/customizer.php';
+

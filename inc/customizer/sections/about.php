@@ -148,10 +148,10 @@ $wp_customize->add_control(
 // Stat Grid Repeater
 $default_stats = wp_json_encode(
 	array(
-		array( 'icon' => 'dashicons-clock',       'title' => '10+ Years',   'description' => 'Engineering experience' ),
-		array( 'icon' => 'dashicons-portfolio',   'title' => '50+ Projects', 'description' => 'Delivered worldwide' ),
-		array( 'icon' => 'dashicons-shield',      'title' => '99.9% Uptime', 'description' => 'Reliability track record' ),
-		array( 'icon' => 'dashicons-networking',  'title' => '100% Remote',  'description' => 'Async collaboration' ),
+		array( 'icon' => 'clock',        'title' => '10+ Years',    'description' => 'Engineering experience' ),
+		array( 'icon' => 'folder-git-2', 'title' => '50+ Projects', 'description' => 'Delivered worldwide' ),
+		array( 'icon' => 'activity',     'title' => '99.9% Uptime',  'description' => 'Reliability track record' ),
+		array( 'icon' => 'globe',        'title' => '100% Remote',   'description' => 'Async collaboration' ),
 	)
 );
 
@@ -169,7 +169,7 @@ $wp_customize->add_control(
 		'geekypress_about_stats',
 		array(
 			'label'             => __( 'Stat / Feature Highlights', 'geekypress' ),
-			'description'       => __( 'The 2x2 highlight grid on the right with Dashicons', 'geekypress' ),
+			'description'       => __( 'The 2x2 highlight grid on the right with developer icons', 'geekypress' ),
 			'section'           => 'geekypress_about_section',
 			'item_label_key'    => 'title',
 			'item_subtitle_key' => 'description',
@@ -177,7 +177,7 @@ $wp_customize->add_control(
 			'fields'            => array(
 				array( 'key' => 'title',       'label' => __( 'Title', 'geekypress' ),                'type' => 'text', 'default' => 'Feature' ),
 				array( 'key' => 'description', 'label' => __( 'Description / Subtitle', 'geekypress' ), 'type' => 'text', 'default' => 'Description' ),
-				array( 'key' => 'icon',        'label' => __( 'Select Icon', 'geekypress' ),          'type' => 'icon', 'default' => 'dashicons-admin-tools' ),
+				array( 'key' => 'icon',        'label' => __( 'Select Icon', 'geekypress' ),          'type' => 'icon', 'default' => 'activity' ),
 			),
 		)
 	)

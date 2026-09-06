@@ -31,6 +31,7 @@ function geekypress_customize_register( $wp_customize ) {
 
 	// Load Section configurations
 	require_once get_template_directory() . '/inc/customizer/sections/header.php';
+	require_once get_template_directory() . '/inc/customizer/sections/seo.php';
 	require_once get_template_directory() . '/inc/customizer/sections/design.php';
 	require_once get_template_directory() . '/inc/customizer/sections/typography.php';
 	require_once get_template_directory() . '/inc/customizer/sections/hero.php';
@@ -38,7 +39,8 @@ function geekypress_customize_register( $wp_customize ) {
 	require_once get_template_directory() . '/inc/customizer/sections/projects.php';
 	require_once get_template_directory() . '/inc/customizer/sections/skills.php';
 	require_once get_template_directory() . '/inc/customizer/sections/experience.php';
-	require_once get_template_directory() . '/inc/customizer/sections/interests.php';
+	require_once get_template_directory() . '/inc/customizer/sections/stats.php';
+	require_once get_template_directory() . '/inc/customizer/sections/blog.php';
 	require_once get_template_directory() . '/inc/customizer/sections/contact.php';
 	require_once get_template_directory() . '/inc/customizer/sections/cta.php';
 	require_once get_template_directory() . '/inc/customizer/sections/footer.php';

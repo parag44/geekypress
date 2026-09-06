@@ -9,13 +9,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$geekypress_theme_mode = get_theme_mod( 'geekypress_theme_mode', 'dark' );
 ?><!doctype html>
-<html <?php language_attributes(); ?> data-theme-mode="<?php echo esc_attr( $geekypress_theme_mode ); ?>">
+<html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<script>
+		(function() {
+			try {
+				var stored = localStorage.getItem('geekypress_theme');
+				var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+				var theme = stored ? stored : (prefersDark ? 'dark' : 'light');
+				document.documentElement.setAttribute('data-theme-mode', theme);
+			} catch (e) {}
+		})();
+	</script>
+	<?php
+	// Favicon rendering: customizer favicon > site_icon > theme default favicon
+	$custom_favicon = get_theme_mod( 'geekypress_favicon', '' );
+	if ( ! empty( $custom_favicon ) ) {
+		$ext  = strtolower( pathinfo( parse_url( $custom_favicon, PHP_URL_PATH ), PATHINFO_EXTENSION ) );
+		$type = 'image/x-icon';
+		if ( 'svg' === $ext ) {
+			$type = 'image/svg+xml';
+		} elseif ( 'png' === $ext ) {
+			$type = 'image/png';
+		} elseif ( 'webp' === $ext ) {
+			$type = 'image/webp';
+		}
+		echo '<link rel="icon" href="' . esc_url( $custom_favicon ) . '" type="' . esc_attr( $type ) . '">' . "\n";
+	} elseif ( ! has_site_icon() ) {
+		echo '<link rel="icon" href="' . esc_url( get_theme_file_uri( 'assets/images/favicon.svg' ) ) . '" type="image/svg+xml">' . "\n";
+	}
+	?>
 	<?php wp_head(); ?>
 </head>
 
@@ -28,10 +55,13 @@ $geekypress_theme_mode = get_theme_mod( 'geekypress_theme_mode', 'dark' );
 	<div class="wp-block-group alignwide terminal-nav-shell">
 
 		<?php
-		$badge_text = get_theme_mod( 'geekypress_header_badge', '>_' );
-		$brand_name = get_theme_mod( 'geekypress_header_title', 'Alex Morgan' );
+		$badge_text  = get_theme_mod( 'geekypress_header_badge', '>_' );
+		$brand_name  = get_theme_mod( 'geekypress_header_title', 'Alex Morgan' );
+		$home_url    = esc_url( home_url( '/' ) );
+		$is_front    = is_front_page();
+		$hash_prefix = $is_front ? '' : $home_url;
 		?>
-		<a class="terminal-brand" href="#home" aria-label="<?php echo esc_attr( $brand_name . ' home' ); ?>">
+		<a class="terminal-brand" href="<?php echo $home_url; ?>" aria-label="<?php echo esc_attr( $brand_name . ' home' ); ?>">
 			<span><?php echo esc_html( $badge_text ); ?></span>
 			<strong><?php echo esc_html( $brand_name ); ?></strong>
 		</a>
@@ -65,12 +95,14 @@ $geekypress_theme_mode = get_theme_mod( 'geekypress_theme_mode', 'dark' );
 				} else {
 					?>
 					<ul class="wp-block-navigation__container">
-						<li class="wp-block-navigation-item"><a href="#home">&gt;_ home</a></li>
-						<li class="wp-block-navigation-item"><a href="#about">about</a></li>
-						<li class="wp-block-navigation-item"><a href="#skills">skills</a></li>
-						<li class="wp-block-navigation-item"><a href="#experience">experience</a></li>
-						<li class="wp-block-navigation-item"><a href="#projects">projects</a></li>
-						<li class="wp-block-navigation-item"><a href="#contact">contact</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $home_url; ?>">&gt;_ home</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $hash_prefix; ?>#about">about</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $hash_prefix; ?>#skills">skills</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $hash_prefix; ?>#experience">experience</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $hash_prefix; ?>#projects">projects</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $hash_prefix; ?>#stats">stats</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $hash_prefix; ?>#blog">articles</a></li>
+						<li class="wp-block-navigation-item"><a href="<?php echo $hash_prefix; ?>#contact">contact</a></li>
 					</ul>
 					<?php
 				}
@@ -78,20 +110,28 @@ $geekypress_theme_mode = get_theme_mod( 'geekypress_theme_mode', 'dark' );
 			</nav>
 		</div>
 
-		<?php
-		$cta_show = get_theme_mod( 'geekypress_header_cta_show', true );
-		$cta_text = get_theme_mod( 'geekypress_header_cta_text', "Let's Talk </>" );
-		$cta_url  = get_theme_mod( 'geekypress_header_cta_url', '#contact' );
-		if ( $cta_show && ! empty( $cta_text ) ) :
-			?>
-			<div class="wp-block-buttons terminal-header-cta">
-				<div class="wp-block-button is-style-outline">
-					<a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( $cta_url ); ?>">
+		<div class="terminal-header-actions">
+			<button type="button" id="terminal-theme-toggle" class="terminal-theme-toggle" aria-label="<?php esc_attr_e( 'Toggle color theme', 'geekypress' ); ?>" title="<?php esc_attr_e( 'Toggle color theme', 'geekypress' ); ?>">
+				<span class="gp-theme-icon-sun" aria-hidden="true"><?php echo geekypress_get_icon( 'sun', '', 18 ); ?></span>
+				<span class="gp-theme-icon-moon" aria-hidden="true"><?php echo geekypress_get_icon( 'moon', '', 18 ); ?></span>
+			</button>
+
+			<?php
+			$cta_show = get_theme_mod( 'geekypress_header_cta_show', true );
+			$cta_text = get_theme_mod( 'geekypress_header_cta_text', "Let's Talk </>" );
+			$cta_url  = get_theme_mod( 'geekypress_header_cta_url', '#contact' );
+			if ( ! $is_front && ! empty( $cta_url ) && 0 === strpos( $cta_url, '#' ) ) {
+				$cta_url = $home_url . $cta_url;
+			}
+			if ( $cta_show && ! empty( $cta_text ) ) :
+				?>
+				<div class="terminal-header-cta">
+					<a class="terminal-header-cta-btn wp-element-button" href="<?php echo esc_url( $cta_url ); ?>">
 						<?php echo esc_html( $cta_text ); ?>
 					</a>
 				</div>
-			</div>
-		<?php endif; ?>
+			<?php endif; ?>
+		</div>
 
 	</div>
 </header>

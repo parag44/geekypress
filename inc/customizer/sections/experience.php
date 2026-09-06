@@ -77,21 +77,21 @@ $default_experience = wp_json_encode(
 	array(
 		array(
 			'date'        => '2023 — Present',
-			'icon'        => 'dashicons-networking',
+			'icon'        => 'layers',
 			'title'       => 'Lead Full-Stack Engineer',
 			'company'     => 'Apex Cloud Systems',
 			'description' => 'Architecting scalable web applications, automating deployment pipelines, and leading engineering sprints.',
 		),
 		array(
 			'date'        => '2020 — 2023',
-			'icon'        => 'dashicons-wordpress',
+			'icon'        => 'code',
 			'title'       => 'Senior WordPress Engineer',
 			'company'     => 'CodeCraft Digital',
 			'description' => 'Engineered custom plugins and performance optimizations, achieving sub-second load times for enterprise clients.',
 		),
 		array(
 			'date'        => '2017 — 2020',
-			'icon'        => 'dashicons-editor-code',
+			'icon'        => 'cpu',
 			'title'       => 'Full-Stack Web Developer',
 			'company'     => 'Pixel & Binary Labs',
 			'description' => 'Developed responsive web applications, integrated payment gateways, and built internal REST APIs.',
@@ -120,7 +120,7 @@ $wp_customize->add_control(
 			'add_item_label'    => __( 'Add Experience Milestone', 'geekypress' ),
 			'fields'            => array(
 				array( 'key' => 'date',        'label' => __( 'Date Range (e.g. Sep 2024 — Present)', 'geekypress' ), 'type' => 'text', 'default' => '2024 — Present' ),
-				array( 'key' => 'icon',        'label' => __( 'Select Icon', 'geekypress' ),                         'type' => 'icon', 'default' => 'dashicons-networking' ),
+				array( 'key' => 'icon',        'label' => __( 'Select Icon', 'geekypress' ),                         'type' => 'icon', 'default' => 'layers' ),
 				array( 'key' => 'title',       'label' => __( 'Job Title', 'geekypress' ),                          'type' => 'text', 'default' => 'Role Title' ),
 				array( 'key' => 'company',     'label' => __( 'Company Name', 'geekypress' ),                       'type' => 'text', 'default' => 'Company' ),
 				array( 'key' => 'description', 'label' => __( 'Job Summary / Accomplishments', 'geekypress' ),      'type' => 'textarea', 'default' => 'Description of responsibilities and achievements.' ),

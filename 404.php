@@ -22,6 +22,9 @@ get_header();
 			<p class="content-text" style="color: var(--pt-muted); margin-bottom: 28px;">
 				<?php esc_html_e( 'The requested URL or resource does not exist in the current namespace.', 'geekypress' ); ?>
 			</p>
+			<div class="terminal-search-404-wrap" style="max-width: 420px; margin: 0 auto 28px auto;">
+				<?php get_search_form(); ?>
+			</div>
 			<div class="terminal-buttons" style="justify-content: center; display: flex; gap: 16px;">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="wp-block-button__link" style="display: inline-block; padding: 12px 24px; background: var(--pt-surface); border: 1px solid var(--pt-green); color: var(--pt-green); font-family: var(--font-mono); text-decoration: none; border-radius: 2px;">
 					&gt;_ <?php esc_html_e( 'Return Home', 'geekypress' ); ?>

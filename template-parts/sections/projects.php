@@ -21,7 +21,7 @@ $projects = geekypress_get_repeater_data(
 	'geekypress_projects_items',
 	array(
 		array(
-			'icon'        => 'dashicons-rest-api',
+			'icon'        => 'rocket',
 			'type'        => 'CLI & OPEN SOURCE',
 			'title'       => 'FastDeploy Engine',
 			'description' => 'A zero-downtime deployment engine for WordPress and PHP web stacks with automated rollbacks, database synchronization, and staging pipelines.',
@@ -30,7 +30,7 @@ $projects = geekypress_get_repeater_data(
 			'link_url'    => 'https://github.com/',
 		),
 		array(
-			'icon'        => 'dashicons-chart-line',
+			'icon'        => 'bar-chart-3',
 			'type'        => 'FULL-STACK DASHBOARD',
 			'title'       => 'CloudMetrics Suite',
 			'description' => 'Real-time developer analytics and server monitoring portal with interactive dashboards, anomaly detection, and instant incident alerts.',
@@ -39,7 +39,7 @@ $projects = geekypress_get_repeater_data(
 			'link_url'    => '#',
 		),
 		array(
-			'icon'        => 'dashicons-shield',
+			'icon'        => 'shield-check',
 			'type'        => 'WordPress Plugin',
 			'title'       => 'SecureSync REST API',
 			'description' => 'A hardened synchronization bridge connecting WordPress sites to modern headless frontends, cloud storage, and automated webhooks.',
@@ -48,7 +48,7 @@ $projects = geekypress_get_repeater_data(
 			'link_url'    => '#',
 		),
 		array(
-			'icon'        => 'dashicons-layout',
+			'icon'        => 'layout-grid',
 			'type'        => 'UI DESIGN SYSTEM',
 			'title'       => 'TerminalKit UI',
 			'description' => 'An accessible, lightweight developer-themed component library with native terminal styling, code blocks, and adaptive themes.',
@@ -61,29 +61,25 @@ $projects = geekypress_get_repeater_data(
 ?>
 
 <div id="projects" class="wp-block-group alignwide terminal-section">
-	<?php if ( ! empty( $label ) ) : ?>
-		<p class="terminal-label"><?php echo esc_html( $label ); ?></p>
-	<?php endif; ?>
+	<div class="terminal-section-header">
+		<?php if ( ! empty( $label ) ) : ?>
+			<p class="terminal-label"><?php echo esc_html( $label ); ?></p>
+		<?php endif; ?>
 
-	<h2 class="wp-block-heading section-title"><span aria-hidden="true">&gt;</span> <?php echo esc_html( $title ); ?><i aria-hidden="true">_</i></h2>
+		<h2 class="wp-block-heading section-title"><span aria-hidden="true">&gt;</span> <?php echo esc_html( $title ); ?><i class="terminal-title-cursor" aria-hidden="true">_</i></h2>
+	</div>
 
 	<?php if ( ! empty( $projects ) && is_array( $projects ) ) : ?>
 		<div class="wp-block-group terminal-card-grid">
 			<?php foreach ( $projects as $proj ) : ?>
 				<?php
-				$icon = ! empty( $proj['icon'] ) ? $proj['icon'] : '';
-				if ( empty( $icon ) && ! empty( $proj['badge'] ) ) {
-					$icon = 'dashicons-portfolio';
-				}
-				if ( empty( $icon ) ) {
-					$icon = 'dashicons-rest-api';
-				}
+				$icon = ! empty( $proj['icon'] ) ? $proj['icon'] : 'rocket';
 				$type = ! empty( $proj['type'] ) ? $proj['type'] : '';
 				$tags = ! empty( $proj['tags'] ) ? array_map( 'trim', explode( ',', $proj['tags'] ) ) : array();
 				?>
 				<div class="wp-block-group terminal-card">
 					<span class="terminal-card-badge" aria-hidden="true">
-						<span class="dashicons <?php echo esc_attr( $icon ); ?>"></span>
+						<?php echo geekypress_get_icon( $icon, 'project-badge-icon', 24 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					</span>
 
 					<?php if ( ! empty( $type ) ) : ?>

@@ -49,12 +49,7 @@
 		});
 	}
 
-	// ── Colors & Theme Mode ──
-	api('geekypress_theme_mode', function(value) {
-		value.bind(function(newval) {
-			document.documentElement.setAttribute('data-theme-mode', newval);
-		});
-	});
+	// ── Customizer Color Live Previews ──
 
 	bindCSSVar('geekypress_color_green', '--pt-green');
 	bindCSSVar('geekypress_color_cyan', '--pt-cyan');
@@ -170,8 +165,18 @@
 			$('#home .terminal-hero-btn2').attr('href', newval);
 		});
 	});
-	bindText('geekypress_hero_terminal_cmd', '#home .terminal-json strong');
-	bindText('geekypress_hero_terminal_json', '#home .terminal-json pre');
+	api('geekypress_hero_terminal_cmd', function(value) {
+		value.bind(function(newval) {
+			$('#home .terminal-json').attr('data-cmd', newval);
+			$('#home .terminal-cmd-text').text(newval);
+		});
+	});
+	api('geekypress_hero_terminal_json', function(value) {
+		value.bind(function(newval) {
+			$('#home .terminal-json').attr('data-raw-json', newval);
+			$('#home .terminal-json-output').text(newval);
+		});
+	});
 	bindText('geekypress_hero_status_label', '#home .terminal-status-prefix');
 	bindText('geekypress_hero_status_text', '#home .terminal-status strong');
 
@@ -212,9 +217,27 @@
 		});
 	});
 
-	// ── Interests ──
-	bindText('geekypress_interests_label', '#interests .terminal-label');
-	bindText('geekypress_interests_title', '#interests .section-title');
+	// ── Stats & Metrics ──
+	bindText('geekypress_stats_label', '#stats .gp-stats-label');
+	api('geekypress_stats_title', function(value) {
+		value.bind(function(newval) {
+			$('#stats .gp-stats-title').html(newval + '<span class="gp-stats-cursor" aria-hidden="true">_</span>');
+		});
+	});
+	bindText('geekypress_stats_desc', '#stats .gp-stats-desc');
+
+	// ── Blog & Articles ──
+	bindText('geekypress_blog_label', '#blog .terminal-label');
+	bindText('geekypress_blog_title', '#blog .section-title');
+	bindText('geekypress_blog_view_all_text', '#blog .terminal-blog-view-all span');
+	api('geekypress_single_post_width', function(value) {
+		value.bind(function(newval) {
+			var w = parseInt(newval, 10);
+			if (!isNaN(w) && w > 0) {
+				document.documentElement.style.setProperty('--gp-single-post-width', w + 'px');
+			}
+		});
+	});
 
 	// ── Contact ──
 	bindText('geekypress_contact_label', '#contact .terminal-label');
@@ -237,24 +260,60 @@
 		$('#contact .terminal-contact-location').text('⌖　' + newval);
 	});
 
-	// ── CTA ──
+	// ── CTA & Terminal Form ──
 	bindText('geekypress_cta_label', '.terminal-cta .terminal-label');
 	api('geekypress_cta_title_prefix', updateCtaTitle);
 	api('geekypress_cta_title_highlight', updateCtaTitle);
 	api('geekypress_cta_title_suffix', updateCtaTitle);
 
 	function updateCtaTitle() {
-		var prefix = api('geekypress_cta_title_prefix') ? api('geekypress_cta_title_prefix').get() : 'Have a';
+		var prefix = api('geekypress_cta_title_prefix') ? api('geekypress_cta_title_prefix').get() : "Let's talk";
 		var highlight = api('geekypress_cta_title_highlight') ? api('geekypress_cta_title_highlight').get() : 'WordPress';
-		var suffix = api('geekypress_cta_title_suffix') ? api('geekypress_cta_title_suffix').get() : 'problem worth solving?';
-		$('.terminal-cta .section-title').html(prefix + ' <mark>' + highlight + '</mark> ' + suffix);
+		var suffix = api('geekypress_cta_title_suffix') ? api('geekypress_cta_title_suffix').get() : '';
+		var fullTitle = prefix ? prefix + ' ' : '';
+		fullTitle += '<mark>' + highlight + '</mark>';
+		if (suffix) {
+			fullTitle += '<br>' + suffix;
+		}
+		$('.terminal-cta .section-title').html(fullTitle);
 	}
 
-	bindText('geekypress_cta_description', '.terminal-cta .content-text');
-	bindText('geekypress_cta_btn_text', '.terminal-cta .wp-block-button__link');
-	api('geekypress_cta_btn_url', function(value) {
+	bindText('geekypress_cta_description', '.terminal-cta .terminal-cta-desc');
+	bindText('geekypress_cta_btn_text', '.terminal-cta .gp-btn-text');
+	api('geekypress_cta_name_placeholder', function(value) {
 		value.bind(function(newval) {
-			$('.terminal-cta .wp-block-button__link').attr('href', newval);
+			$('#gp_sender_name').attr('placeholder', newval);
+		});
+	});
+	api('geekypress_cta_email_placeholder', function(value) {
+		value.bind(function(newval) {
+			$('#gp_sender_email').attr('placeholder', newval);
+		});
+	});
+	api('geekypress_cta_msg_placeholder', function(value) {
+		value.bind(function(newval) {
+			$('#gp_sender_message').attr('placeholder', newval);
+		});
+	});
+	api('geekypress_cta_recipient_email', function(value) {
+		value.bind(function(newval) {
+			$('#gp-terminal-contact-form').attr('data-recipient', newval);
+		});
+	});
+	api('geekypress_cta_success_msg', function(value) {
+		value.bind(function(newval) {
+			$('#gp-terminal-contact-form').attr('data-success', newval);
+		});
+	});
+
+	// ── Animations Toggle Live Preview ──
+	api('geekypress_animations_enabled', function(value) {
+		value.bind(function(newval) {
+			if (newval) {
+				$('body').addClass('has-gp-animations');
+			} else {
+				$('body').removeClass('has-gp-animations');
+			}
 		});
 	});
 
@@ -329,18 +388,25 @@
 		{ selector: '#experience .section-title', control: 'geekypress_experience_title', section: 'geekypress_experience_section' },
 		{ selector: '#experience .terminal-timeline', control: 'geekypress_experience_items', section: 'geekypress_experience_section' },
 
-		// Interests elements
-		{ selector: '#interests .section-title', control: 'geekypress_interests_title', section: 'geekypress_interests_section' },
-		{ selector: '#interests .terminal-list', control: 'geekypress_interests_items', section: 'geekypress_interests_section' },
+		// Stats elements
+		{ selector: '#stats .gp-stats-title', control: 'geekypress_stats_title', section: 'geekypress_stats_section' },
+		{ selector: '#stats .gp-stats-desc', control: 'geekypress_stats_desc', section: 'geekypress_stats_section' },
+		{ selector: '#stats .gp-stats-grid', control: 'geekypress_stats_items', section: 'geekypress_stats_section' },
+
+		// Blog elements
+		{ selector: '#blog .section-title', control: 'geekypress_blog_title', section: 'geekypress_blog_section' },
+		{ selector: '#blog .terminal-blog-slider-nav', control: 'geekypress_blog_slider_enabled', section: 'geekypress_blog_section' },
+		{ selector: '#blog .terminal-blog-grid, #blog .terminal-blog-slider-wrap', control: 'geekypress_blog_per_screen', section: 'geekypress_blog_section' },
 
 		// Contact elements
 		{ selector: '#contact .section-title', control: 'geekypress_contact_title', section: 'geekypress_contact_section' },
 		{ selector: '#contact .terminal-contact', control: 'geekypress_contact_email', section: 'geekypress_contact_section' },
 
-		// CTA elements
+		// CTA & Terminal Form elements
 		{ selector: '.terminal-cta .section-title', control: 'geekypress_cta_title_prefix', section: 'geekypress_cta_section' },
-		{ selector: '.terminal-cta .content-text', control: 'geekypress_cta_description', section: 'geekypress_cta_section' },
-		{ selector: '.terminal-cta .wp-block-button__link', control: 'geekypress_cta_btn_text', section: 'geekypress_cta_section' },
+		{ selector: '.terminal-cta .terminal-cta-desc', control: 'geekypress_cta_description', section: 'geekypress_cta_section' },
+		{ selector: '.terminal-cta .gp-terminal-form', control: 'geekypress_cta_recipient_email', section: 'geekypress_cta_section' },
+		{ selector: '.terminal-cta .gp-terminal-submit-btn', control: 'geekypress_cta_btn_text', section: 'geekypress_cta_section' },
 
 		// Footer elements
 		{ selector: '.terminal-site-footer .terminal-copyright', control: 'geekypress_footer_copyright', section: 'geekypress_footer_section' },

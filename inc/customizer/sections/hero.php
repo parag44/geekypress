@@ -202,10 +202,10 @@ $wp_customize->add_control(
 // Social Links Repeater
 $default_socials = wp_json_encode(
 	array(
-		array( 'label' => 'GH', 'title' => 'GitHub', 'url' => 'https://github.com/' ),
-		array( 'label' => 'in', 'title' => 'LinkedIn', 'url' => 'https://linkedin.com/' ),
-		array( 'label' => 'X',  'title' => 'Twitter/X', 'url' => 'https://x.com/' ),
-		array( 'label' => '@',  'title' => 'Email', 'url' => 'mailto:hello@example.com' ),
+		array( 'icon' => 'github',   'title' => 'GitHub',    'url' => 'https://github.com/' ),
+		array( 'icon' => 'linkedin', 'title' => 'LinkedIn',  'url' => 'https://linkedin.com/' ),
+		array( 'icon' => 'twitter',  'title' => 'Twitter/X', 'url' => 'https://x.com/' ),
+		array( 'icon' => 'mail',     'title' => 'Email',     'url' => 'mailto:hello@example.com' ),
 	)
 );
 
@@ -223,15 +223,15 @@ $wp_customize->add_control(
 		'geekypress_hero_socials',
 		array(
 			'label'             => __( 'Terminal Social Links', 'geekypress' ),
-			'description'       => __( 'Mono-letter badges below buttons (e.g. in, X, W, @)', 'geekypress' ),
+			'description'       => __( 'Social and developer profiles with icons', 'geekypress' ),
 			'section'           => 'geekypress_hero_section',
-			'item_label_key'    => 'label',
+			'item_label_key'    => 'title',
 			'item_subtitle_key' => 'url',
 			'add_item_label'    => __( 'Add Social Link', 'geekypress' ),
 			'fields'            => array(
-				array( 'key' => 'label', 'label' => __( 'Badge Char / Icon (e.g. in, X, @)', 'geekypress' ), 'type' => 'text', 'default' => '@' ),
+				array( 'key' => 'icon',  'label' => __( 'Select Icon', 'geekypress' ),    'type' => 'icon', 'default' => 'globe' ),
 				array( 'key' => 'title', 'label' => __( 'Title / Tooltip', 'geekypress' ), 'type' => 'text', 'default' => 'Social Profile' ),
-				array( 'key' => 'url',   'label' => __( 'URL (or mailto:)', 'geekypress' ), 'type' => 'url', 'default' => '#' ),
+				array( 'key' => 'url',   'label' => __( 'URL (or mailto:)', 'geekypress' ), 'type' => 'url',  'default' => '#' ),
 			),
 		)
 	)
@@ -252,7 +252,7 @@ $wp_customize->add_control(
 		'geekypress_hero_image',
 		array(
 			'label'       => __( 'Terminal Window Profile Photo', 'geekypress' ),
-			'description' => __( 'Defaults to theme built-in photo if left empty.', 'geekypress' ),
+			'description' => __( 'Upload your profile photo (supports WebP, PNG, JPG, SVG). Defaults to theme built-in avatar if left empty.', 'geekypress' ),
 			'section'     => 'geekypress_hero_section',
 		)
 	)
@@ -276,7 +276,7 @@ $wp_customize->add_control(
 	)
 );
 
-$default_json = "{\n  \"name\": \"Alex Morgan\",\n  \"role\": \"Full-Stack Engineer\",\n  \"stack\": [\"PHP\", \"TypeScript\", \"WordPress\", \"React\"],\n  \"location\": \"San Francisco, CA / Remote\",\n  \"available\": true\n}";
+$default_json = "{\n  \"name\": \"Parag Das\",\n  \"role\": \"Associate Lead, Tech Support\",\n  \"focus\": [\"WordPress\", \"QA\", \"Support\", \"Debugging\"],\n  \"location\": \"Dhaka, Bangladesh\",\n  \"community\": \"WordPress\"\n}";
 $wp_customize->add_setting(
 	'geekypress_hero_terminal_json',
 	array(

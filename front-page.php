@@ -19,7 +19,7 @@ get_header();
 	<?php
 	$sections = geekypress_get_section_order();
 
-	$rendered_bottom_row = false;
+	$rendered = array();
 
 	if ( ! empty( $sections ) ) {
 		$count = count( $sections );
@@ -32,58 +32,61 @@ get_header();
 
 			$slug = sanitize_key( $sec['slug'] );
 
+			if ( in_array( $slug, $rendered, true ) ) {
+				continue;
+			}
+
 			// Check individual section enable theme mod
 			$is_mod_enabled = get_theme_mod( 'geekypress_' . $slug . '_enabled', true );
 			if ( ! $is_mod_enabled ) {
 				continue;
 			}
 
-			// Special handling for Interests and Contact to wrap them in .terminal-bottom two-column grid if adjacent
-			if ( 'interests' === $slug || 'contact' === $slug ) {
-				// If both interests and contact are present and consecutive, render inside two-column row
-				$next_sec = ( $i + 1 < $count ) ? $sections[ $i + 1 ] : null;
+			// Merge Contact & Socials and Let's talk WordPress (CTA) into a single two-column row
+			if ( 'contact' === $slug || 'cta' === $slug ) {
+				$other_slug    = ( 'contact' === $slug ) ? 'cta' : 'contact';
+				$other_enabled = false;
 
-				if ( 'interests' === $slug && $next_sec && 'contact' === $next_sec['slug'] && ! empty( $next_sec['enabled'] ) && get_theme_mod( 'geekypress_contact_enabled', true ) ) {
+				// Check if the other section is also present and enabled
+				foreach ( $sections as $check_sec ) {
+					if ( isset( $check_sec['slug'] ) && $check_sec['slug'] === $other_slug && ! empty( $check_sec['enabled'] ) ) {
+						if ( get_theme_mod( 'geekypress_' . $other_slug . '_enabled', true ) && ! in_array( $other_slug, $rendered, true ) ) {
+							$other_enabled = true;
+						}
+						break;
+					}
+				}
+
+				if ( $other_enabled ) {
 					?>
-					<div class="wp-block-columns alignwide terminal-section terminal-bottom">
-						<div class="wp-block-column">
-							<?php get_template_part( 'template-parts/sections/interests' ); ?>
-						</div>
-						<div class="wp-block-column">
+					<div class="wp-block-columns alignwide terminal-section terminal-bottom terminal-contact-cta-row">
+						<div class="wp-block-column terminal-bottom-col">
 							<?php get_template_part( 'template-parts/sections/contact' ); ?>
+						</div>
+						<div class="wp-block-column terminal-bottom-col">
+							<?php get_template_part( 'template-parts/sections/cta' ); ?>
 						</div>
 					</div>
 					<?php
-					$i++; // skip next since rendered
-					continue;
-				} elseif ( 'contact' === $slug && $next_sec && 'interests' === $next_sec['slug'] && ! empty( $next_sec['enabled'] ) && get_theme_mod( 'geekypress_interests_enabled', true ) ) {
-					?>
-					<div class="wp-block-columns alignwide terminal-section terminal-bottom">
-						<div class="wp-block-column">
-							<?php get_template_part( 'template-parts/sections/contact' ); ?>
-						</div>
-						<div class="wp-block-column">
-							<?php get_template_part( 'template-parts/sections/interests' ); ?>
-						</div>
-					</div>
-					<?php
-					$i++; // skip next since rendered
+					$rendered[] = 'contact';
+					$rendered[] = 'cta';
 					continue;
 				} else {
-					// Standalone column wrapper
 					?>
-					<div class="wp-block-columns alignwide terminal-section terminal-bottom">
-						<div class="wp-block-column" style="flex: 1 1 100%;">
+					<div class="wp-block-columns alignwide terminal-section terminal-bottom terminal-contact-cta-row">
+						<div class="wp-block-column terminal-bottom-col" style="flex: 1 1 100%;">
 							<?php get_template_part( 'template-parts/sections/' . $slug ); ?>
 						</div>
 					</div>
 					<?php
+					$rendered[] = $slug;
 					continue;
 				}
 			}
 
 			// Standard section render
 			get_template_part( 'template-parts/sections/' . $slug );
+			$rendered[] = $slug;
 		}
 	}
 	?>

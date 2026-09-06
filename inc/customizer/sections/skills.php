@@ -75,18 +75,18 @@ $wp_customize->add_control(
 // Skills Repeater
 $default_skills = wp_json_encode(
 	array(
-		array( 'icon' => 'dashicons-wordpress',        'title' => 'WordPress Core & Themes' ),
-		array( 'icon' => 'dashicons-editor-code',      'title' => 'HTML, CSS, JavaScript, PHP' ),
-		array( 'icon' => 'dashicons-admin-tools',      'title' => 'Debugging & Troubleshooting' ),
-		array( 'icon' => 'dashicons-layout',           'title' => 'Elementor & Page Builders' ),
-		array( 'icon' => 'dashicons-desktop',          'title' => 'Browser Dev Tools' ),
-		array( 'icon' => 'dashicons-admin-site-alt3',  'title' => 'cPanel, FTP, DNS, Hosting' ),
-		array( 'icon' => 'dashicons-rest-api',         'title' => 'REST API & AJAX' ),
-		array( 'icon' => 'dashicons-sos',              'title' => 'Conflict Resolution' ),
-		array( 'icon' => 'dashicons-shield',           'title' => 'Security & Performance' ),
-		array( 'icon' => 'dashicons-tickets-alt',      'title' => 'Ticketing Systems' ),
-		array( 'icon' => 'dashicons-randomize',        'title' => 'Version Control (Git)' ),
-		array( 'icon' => 'dashicons-flag',             'title' => 'Bug Replication & Docs' ),
+		array( 'icon' => 'code',         'title' => 'WordPress Core & Themes' ),
+		array( 'icon' => 'file-code',    'title' => 'HTML, CSS, JavaScript, PHP' ),
+		array( 'icon' => 'bug',          'title' => 'Debugging & Troubleshooting' ),
+		array( 'icon' => 'layout',       'title' => 'Elementor & Page Builders' ),
+		array( 'icon' => 'terminal',     'title' => 'Browser Dev Tools' ),
+		array( 'icon' => 'server',       'title' => 'cPanel, FTP, DNS, Hosting' ),
+		array( 'icon' => 'webhook',      'title' => 'REST API & AJAX' ),
+		array( 'icon' => 'life-buoy',    'title' => 'Conflict Resolution' ),
+		array( 'icon' => 'shield-check', 'title' => 'Security & Performance' ),
+		array( 'icon' => 'check-circle', 'title' => 'Ticketing Systems' ),
+		array( 'icon' => 'git-branch',   'title' => 'Version Control (Git)' ),
+		array( 'icon' => 'book-open',    'title' => 'Bug Replication & Docs' ),
 	)
 );
 
@@ -111,7 +111,7 @@ $wp_customize->add_control(
 			'add_item_label'    => __( 'Add Skill', 'geekypress' ),
 			'fields'            => array(
 				array( 'key' => 'title', 'label' => __( 'Skill Name', 'geekypress' ),  'type' => 'text', 'default' => 'Skill Name' ),
-				array( 'key' => 'icon',  'label' => __( 'Select Icon', 'geekypress' ), 'type' => 'icon', 'default' => 'dashicons-yes' ),
+				array( 'key' => 'icon',  'label' => __( 'Select Icon', 'geekypress' ), 'type' => 'icon', 'default' => 'check-circle' ),
 			),
 		)
 	)

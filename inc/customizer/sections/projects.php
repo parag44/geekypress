@@ -76,7 +76,7 @@ $wp_customize->add_control(
 $default_projects = wp_json_encode(
 	array(
 		array(
-			'icon'        => 'dashicons-rest-api',
+			'icon'        => 'rocket',
 			'type'        => 'CLI & OPEN SOURCE',
 			'title'       => 'FastDeploy Engine',
 			'description' => 'A zero-downtime deployment engine for WordPress and PHP web stacks with automated rollbacks, database synchronization, and staging pipelines.',
@@ -85,7 +85,7 @@ $default_projects = wp_json_encode(
 			'link_url'    => 'https://github.com/',
 		),
 		array(
-			'icon'        => 'dashicons-chart-line',
+			'icon'        => 'bar-chart-3',
 			'type'        => 'FULL-STACK DASHBOARD',
 			'title'       => 'CloudMetrics Suite',
 			'description' => 'Real-time developer analytics and server monitoring portal with interactive dashboards, anomaly detection, and instant incident alerts.',
@@ -94,7 +94,7 @@ $default_projects = wp_json_encode(
 			'link_url'    => '#',
 		),
 		array(
-			'icon'        => 'dashicons-shield',
+			'icon'        => 'shield-check',
 			'type'        => 'WordPress Plugin',
 			'title'       => 'SecureSync REST API',
 			'description' => 'A hardened synchronization bridge connecting WordPress sites to modern headless frontends, cloud storage, and automated webhooks.',
@@ -103,7 +103,7 @@ $default_projects = wp_json_encode(
 			'link_url'    => '#',
 		),
 		array(
-			'icon'        => 'dashicons-layout',
+			'icon'        => 'layout-grid',
 			'type'        => 'UI DESIGN SYSTEM',
 			'title'       => 'TerminalKit UI',
 			'description' => 'An accessible, lightweight developer-themed component library with native terminal styling, code blocks, and adaptive themes.',
@@ -134,7 +134,7 @@ $wp_customize->add_control(
 			'item_subtitle_key' => 'type',
 			'add_item_label'    => __( 'Add Project Card', 'geekypress' ),
 			'fields'            => array(
-				array( 'key' => 'icon',        'label' => __( 'Select Icon', 'geekypress' ),               'type' => 'icon',     'default' => 'dashicons-rest-api' ),
+				array( 'key' => 'icon',        'label' => __( 'Select Icon', 'geekypress' ),               'type' => 'icon',     'default' => 'rocket' ),
 				array( 'key' => 'type',        'label' => __( 'Category / Type (e.g. WordPress Plugin)', 'geekypress' ), 'type' => 'text',     'default' => 'PROJECT' ),
 				array( 'key' => 'title',       'label' => __( 'Project Title', 'geekypress' ),             'type' => 'text',     'default' => 'Project Name' ),
 				array( 'key' => 'description', 'label' => __( 'Description', 'geekypress' ),               'type' => 'textarea', 'default' => 'Project description goes here.' ),

@@ -18,29 +18,6 @@ $wp_customize->add_section(
 	)
 );
 
-// Color Scheme Mode (Dark / Light / Auto)
-$wp_customize->add_setting(
-	'geekypress_theme_mode',
-	array(
-		'default'           => 'dark',
-		'transport'         => 'postMessage',
-		'sanitize_callback' => 'geekypress_sanitize_color_mode',
-	)
-);
-$wp_customize->add_control(
-	'geekypress_theme_mode',
-	array(
-		'label'       => __( 'Color Mode', 'geekypress' ),
-		'description' => __( 'Select your theme appearance mode. "Auto" will automatically match the visitor\'s operating system preference (light/dark).', 'geekypress' ),
-		'section'     => 'geekypress_design_section',
-		'type'        => 'radio',
-		'choices'     => array(
-			'dark'  => __( 'Dark (Classic Terminal)', 'geekypress' ),
-			'light' => __( 'Light (Clean Minimal)', 'geekypress' ),
-			'auto'  => __( 'Auto (Match OS / System Preference)', 'geekypress' ),
-		),
-	)
-);
 
 // Terminal Accent Green
 $wp_customize->add_setting(
@@ -203,6 +180,25 @@ $wp_customize->add_control(
 			'description' => __( 'Color when hovering over links and project URLs', 'geekypress' ),
 			'section'     => 'geekypress_design_section',
 		)
+	)
+);
+
+// Enable UI Animations (Experimental & Performance Optimized)
+$wp_customize->add_setting(
+	'geekypress_animations_enabled',
+	array(
+		'default'           => true,
+		'transport'         => 'postMessage',
+		'sanitize_callback' => 'geekypress_sanitize_checkbox',
+	)
+);
+$wp_customize->add_control(
+	'geekypress_animations_enabled',
+	array(
+		'label'       => __( 'Enable Lightweight UI Animations (Experimental)', 'geekypress' ),
+		'description' => __( 'Smooth, hardware-accelerated CSS animations: scroll entrance reveals, status radar pulse, and interactive card lift effects. Zero impact on page speed.', 'geekypress' ),
+		'section'     => 'geekypress_design_section',
+		'type'        => 'checkbox',
 	)
 );
 

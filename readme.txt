@@ -3,7 +3,7 @@ Contributors: parag44
 Requires at least: 6.6
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ GeekyPress is a developer portfolio theme built for software engineers, full-sta
 
 Features:
 * Out-of-the-box demo data showcasing projects, skills, career timeline, and contact information immediately upon activation.
-* Native WordPress Customizer integration with repeater controls for projects, skills, timeline, and social links.
+* Native WordPress Customizer integration with repeater controls for projects, skills, timeline, stats, and social links.
 * Deep click-to-edit preview linking in the Customizer.
 * Google Fonts integration with developer-centric monospace fonts (Fira Code, JetBrains Mono, Space Mono, and more) and programming ligatures support.
 * Self-hosted local fallback fonts (Geist Sans & Geist Mono).
@@ -47,20 +47,33 @@ This theme bundles or uses the following third-party resources:
   License: GNU General Public License v2 or later
   Copyright (c) 2026 Parag Das
 
-* Dashicons
-  Source: WordPress Core (wp-includes/css/dashicons.min.css)
-  License: GNU General Public License v2 or later
-  Copyright (c) WordPress Foundation
-
-* Google Fonts
-  Requested dynamically via Google Fonts API (display=swap)
-  License: SIL Open Font License, 1.1 / Apache 2.0
+* Lucide Icons
+  Source: https://github.com/lucide-icons/lucide
+  License: ISC License (https://opensource.org/licenses/ISC)
+  Copyright (c) 2022-2024 Lucide Contributors
 
 == Changelog ==
+
+= 1.0.2 =
+* Enabled full WebP image upload and display support for profile avatar and media library.
+* Added custom Site Favicon upload control in Customizer with SVG/PNG/ICO/WebP support.
+* Added basic SEO & Social Meta settings in Customizer (meta description, keywords, robots directives, Open Graph, and Twitter Cards).
+* Replaced "Interests & Curiosities" with dynamic "Stats & Metrics" section featuring customizable developer stat cards (50+ projects, 5+ years experience, 100% satisfaction, etc.).
+* Upgraded Call to Action section with an interactive, responsive terminal contact form with Customizer-controlled placeholders and submit actions.
+
+= 1.0.1 =
+* Replaced Dashicons with lightweight, zero-dependency inline Lucide SVG icon system.
+* Added interactive SVG icon picker to Terminal Social Links in Customizer.
+* Added live dark / light mode visitor color switcher toggle.
+* Added customizer-controlled Front Page Blog & Articles section.
+* Added single post reading experience with terminal meta HUD and customizer width control.
+* Added dedicated search results and search form templates (`search.php`, `searchform.php`).
+* 100% GDPR and Theme Directory compliance: removed all remote web font requests, relying on locally bundled variable fonts (Geist Mono & Geist Sans) and system monospaces.
+* Removed activation option mutation hook for strict WordPress.org Theme Review guidelines compliance.
 
 = 1.0.0 =
 * Initial public release on WordPress.org.
 * Native Customizer API controls with repeater fields.
 * Interactive terminal profile with developer placeholder avatar.
-* Google Fonts integration with developer ligatures support.
+* Developer ligatures support.
 * Responsive mobile navigation drawer.

@@ -24,7 +24,7 @@ $back_to_top = get_theme_mod( 'geekypress_back_to_top', true );
 </div><!-- .wp-site-blocks -->
 
 <?php if ( $back_to_top ) : ?>
-	<a class="terminal-back-top" href="#home" aria-label="<?php esc_attr_e( 'Back to top', 'geekypress' ); ?>">↑</a>
+	<button type="button" class="terminal-back-top" id="terminal-back-top" aria-label="<?php esc_attr_e( 'Back to top', 'geekypress' ); ?>" title="<?php esc_attr_e( 'Back to top', 'geekypress' ); ?>">↑</button>
 <?php endif; ?>
 
 <?php wp_footer(); ?>

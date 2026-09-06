@@ -9,6 +9,10 @@
  * @package GeekyPress
  */
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 if ( ! class_exists( 'WP_Customize_Control' ) ) {
 	return;
 }
@@ -85,9 +89,11 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 
 		$control_id   = 'gp-repeater-' . esc_attr( preg_replace( '/[^a-z0-9_-]/i', '-', $this->id ) );
 		$setting_link = $this->get_link();
-		$fields_json  = wp_json_encode( $this->fields );
-		$items_json   = wp_json_encode( $items );
-		$setting_id   = wp_json_encode( $this->settings['default']->id );
+		$flags        = JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP;
+		$fields_json  = wp_json_encode( $this->fields, $flags );
+		$items_json   = wp_json_encode( $items, $flags );
+		$setting_id   = wp_json_encode( $this->settings['default']->id, $flags );
+		$catalog_json = function_exists( 'geekypress_get_icon_catalog' ) ? wp_json_encode( geekypress_get_icon_catalog(), $flags ) : '[]';
 		?>
 		<div class="gp-repeater-control" id="<?php echo esc_attr( $control_id ); ?>">
 			<?php if ( ! empty( $this->label ) ) : ?>
@@ -151,7 +157,7 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 		.gp-icon-picker-toggle { display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 10px; background: #f6f7f7; border: 1px solid #8c8f94; border-radius: 4px; cursor: pointer; text-align: left; box-sizing: border-box; }
 		.gp-icon-picker-toggle:hover { border-color: #2271b1; background: #f0f0f1; }
 		.gp-icon-preview { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; background: #050d14; border: 1px solid #39ff88; border-radius: 3px; color: #39ff88; flex-shrink: 0; }
-		.gp-icon-preview .dashicons { font-size: 18px; width: 18px; height: 18px; color: #39ff88; line-height: 1; }
+		.gp-icon-preview svg, .gp-icon-preview .dashicons { width: 16px; height: 16px; stroke: #39ff88; fill: none; display: block; }
 		.gp-icon-name { flex: 1; font-family: monospace; font-size: 12px; color: #1d2327; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 		.gp-icon-toggle-arrow { margin-left: auto; color: #646970; }
 		.gp-icon-dropdown { display: none; margin-top: 6px; padding: 8px; background: #fff; border: 1px solid #dcdcde; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,.1); max-height: 220px; overflow-y: auto; }
@@ -160,7 +166,7 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 		.gp-icon-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
 		.gp-icon-btn { display: flex; align-items: center; justify-content: center; height: 32px; background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 3px; cursor: pointer; color: #2c3338; transition: all .1s ease; }
 		.gp-icon-btn:hover, .gp-icon-btn.is-selected { background: #050d14; color: #39ff88; border-color: #39ff88; }
-		.gp-icon-btn .dashicons { font-size: 18px; width: 18px; height: 18px; line-height: 1; pointer-events: none; }
+		.gp-icon-btn svg, .gp-icon-btn .dashicons { width: 18px; height: 18px; stroke: currentColor; fill: none; pointer-events: none; }
 		</style>
 
 		<script>
@@ -172,12 +178,27 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 			var itemSubKey   = <?php echo wp_json_encode( $this->item_subtitle_key ); ?>;
 			var initialItems = <?php echo $items_json; ?>;
 			var settingId    = <?php echo $setting_id; ?>;
+			var iconCatalog  = <?php echo $catalog_json; ?>;
 			var dragSrcEl    = null;
 
 			function esc(str) {
 				var d = document.createElement('div');
 				d.appendChild(document.createTextNode(String(str || '')));
 				return d.innerHTML;
+			}
+
+			function getIconHtml(slug) {
+				if (!slug) return '';
+				var cleanSlug = String(slug).replace(/^dashicons-/, '');
+				for (var i = 0; i < iconCatalog.length; i++) {
+					if (iconCatalog[i].slug === slug || iconCatalog[i].slug === cleanSlug) {
+						return iconCatalog[i].svg;
+					}
+				}
+				if (String(slug).indexOf('dashicons-') === 0) {
+					return '<span class="dashicons ' + esc(slug) + '"></span>';
+				}
+				return iconCatalog[0] ? iconCatalog[0].svg : '';
 			}
 			function getContainer() { return document.getElementById(controlId); }
 			function getList() { return getContainer() ? getContainer().querySelector('.gp-repeater-list') : null; }
@@ -226,24 +247,6 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 				if (sub) sub.textContent = itemSubKey ? (data[itemSubKey] || '') : '';
 			}
 
-			var COMMON_DASHICONS = [
-				'dashicons-admin-tools', 'dashicons-admin-site', 'dashicons-admin-site-alt3',
-				'dashicons-wordpress', 'dashicons-wordpress-alt', 'dashicons-editor-code',
-				'dashicons-desktop', 'dashicons-laptop', 'dashicons-smartphone', 'dashicons-tablet',
-				'dashicons-database', 'dashicons-rest-api', 'dashicons-cloud', 'dashicons-networking',
-				'dashicons-shield', 'dashicons-shield-alt', 'dashicons-lock', 'dashicons-unlock',
-				'dashicons-portfolio', 'dashicons-clock', 'dashicons-calendar', 'dashicons-performance',
-				'dashicons-chart-bar', 'dashicons-chart-line', 'dashicons-analytics', 'dashicons-visibility',
-				'dashicons-groups', 'dashicons-buddicons-community', 'dashicons-sos', 'dashicons-tickets-alt',
-				'dashicons-randomize', 'dashicons-flag', 'dashicons-star-filled', 'dashicons-heart',
-				'dashicons-yes', 'dashicons-yes-alt', 'dashicons-marker', 'dashicons-location',
-				'dashicons-email', 'dashicons-email-alt', 'dashicons-share', 'dashicons-external',
-				'dashicons-media-code', 'dashicons-media-document', 'dashicons-format-aside', 'dashicons-format-status',
-				'dashicons-layout', 'dashicons-welcome-widgets-menus', 'dashicons-category', 'dashicons-tag',
-				'dashicons-superhero', 'dashicons-superhero-alt', 'dashicons-awards', 'dashicons-lightbulb',
-				'dashicons-coffee', 'dashicons-beer', 'dashicons-art', 'dashicons-camera'
-			];
-
 			function renderField(f, value) {
 				var uid = 'gp-' + f.key + '-' + Math.random().toString(36).substr(2, 6);
 				if (f.type === 'checkbox') {
@@ -265,21 +268,22 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 					}
 					html += '</select>';
 				} else if (f.type === 'icon') {
-					var currentIcon = value || f.default || 'dashicons-admin-tools';
+					var currentIcon = value || f.default || 'terminal';
+					var previewHtml = getIconHtml(currentIcon);
 					html += '<div class="gp-icon-picker-wrap">';
 					html += '<input type="hidden" data-key="' + esc(f.key) + '" value="' + esc(currentIcon) + '" />';
 					html += '<button type="button" class="gp-icon-picker-toggle">';
-					html += '<span class="gp-icon-preview"><span class="dashicons ' + esc(currentIcon) + '"></span></span>';
+					html += '<span class="gp-icon-preview">' + previewHtml + '</span>';
 					html += '<span class="gp-icon-name">' + esc(currentIcon) + '</span>';
 					html += '<span class="gp-icon-toggle-arrow dashicons dashicons-arrow-down-alt2"></span>';
 					html += '</button>';
 					html += '<div class="gp-icon-dropdown">';
-					html += '<input type="text" class="gp-icon-search" placeholder="Search icons (e.g. code, tool, shield)..." />';
+					html += '<input type="text" class="gp-icon-search" placeholder="Search developer icons (e.g. code, git, server)..." />';
 					html += '<div class="gp-icon-grid">';
-					COMMON_DASHICONS.forEach(function(ic) {
-						var isSel = (ic === currentIcon) ? ' is-selected' : '';
-						html += '<button type="button" class="gp-icon-btn' + isSel + '" data-icon="' + esc(ic) + '" title="' + esc(ic) + '">';
-						html += '<span class="dashicons ' + esc(ic) + '"></span>';
+					iconCatalog.forEach(function(item) {
+						var isSel = (item.slug === currentIcon) ? ' is-selected' : '';
+						html += '<button type="button" class="gp-icon-btn' + isSel + '" data-icon="' + esc(item.slug) + '" title="' + esc(item.label) + ' (' + esc(item.slug) + ')">';
+						html += item.svg;
 						html += '</button>';
 					});
 					html += '</div>';
@@ -419,7 +423,7 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 					var dropdown = wrap.querySelector('.gp-icon-dropdown');
 					var search = wrap.querySelector('.gp-icon-search');
 					var hidden = wrap.querySelector('input[type="hidden"]');
-					var previewIcon = wrap.querySelector('.gp-icon-preview .dashicons');
+					var previewWrap = wrap.querySelector('.gp-icon-preview');
 					var nameLabel = wrap.querySelector('.gp-icon-name');
 					var iconButtons = wrap.querySelectorAll('.gp-icon-btn');
 
@@ -444,7 +448,8 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 							var query = (e.target.value || '').toLowerCase().trim();
 							iconButtons.forEach(function(btn) {
 								var ic = (btn.getAttribute('data-icon') || '').toLowerCase();
-								btn.style.display = (!query || ic.indexOf(query) !== -1) ? '' : 'none';
+								var title = (btn.getAttribute('title') || '').toLowerCase();
+								btn.style.display = (!query || ic.indexOf(query) !== -1 || title.indexOf(query) !== -1) ? '' : 'none';
 							});
 						});
 					}
@@ -456,8 +461,8 @@ class GeekyPress_Repeater_Control extends WP_Customize_Control {
 							var selectedIcon = btn.getAttribute('data-icon');
 							if (hidden) hidden.value = selectedIcon;
 							if (nameLabel) nameLabel.textContent = selectedIcon;
-							if (previewIcon) {
-								previewIcon.className = 'dashicons ' + selectedIcon;
+							if (previewWrap) {
+								previewWrap.innerHTML = btn.innerHTML;
 							}
 							iconButtons.forEach(function(b) {
 								b.classList.toggle('is-selected', b === btn);

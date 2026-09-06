@@ -27,16 +27,16 @@ $btn2_url     = get_theme_mod( 'geekypress_hero_btn2_url', '#contact' );
 $socials = geekypress_get_repeater_data(
 	'geekypress_hero_socials',
 	array(
-		array( 'label' => 'GH', 'title' => 'GitHub', 'url' => 'https://github.com/' ),
-		array( 'label' => 'in', 'title' => 'LinkedIn', 'url' => 'https://linkedin.com/' ),
-		array( 'label' => 'X',  'title' => 'Twitter/X', 'url' => 'https://x.com/' ),
-		array( 'label' => '@',  'title' => 'Email', 'url' => 'mailto:hello@example.com' ),
+		array( 'icon' => 'github',   'title' => 'GitHub',    'url' => 'https://github.com/' ),
+		array( 'icon' => 'linkedin', 'title' => 'LinkedIn',  'url' => 'https://linkedin.com/' ),
+		array( 'icon' => 'twitter',  'title' => 'Twitter/X', 'url' => 'https://x.com/' ),
+		array( 'icon' => 'mail',     'title' => 'Email',     'url' => 'mailto:hello@example.com' ),
 	)
 );
 
 $custom_img    = get_theme_mod( 'geekypress_hero_image', '' );
 $term_cmd      = get_theme_mod( 'geekypress_hero_terminal_cmd', '>_ cat developer.json' );
-$default_json  = "{\n  \"name\": \"Alex Morgan\",\n  \"role\": \"Full-Stack Engineer\",\n  \"stack\": [\"PHP\", \"TypeScript\", \"WordPress\", \"React\"],\n  \"location\": \"San Francisco, CA / Remote\",\n  \"available\": true\n}";
+$default_json  = "{\n  \"name\": \"Parag Das\",\n  \"role\": \"Associate Lead, Tech Support\",\n  \"focus\": [\"WordPress\", \"QA\", \"Support\", \"Debugging\"],\n  \"location\": \"Dhaka, Bangladesh\",\n  \"community\": \"WordPress\"\n}";
 $term_json     = get_theme_mod( 'geekypress_hero_terminal_json', $default_json );
 $status_prefix = get_theme_mod( 'geekypress_hero_status_label', 'Available for' );
 $status_text   = get_theme_mod( 'geekypress_hero_status_text', 'Contract & Full-Time Roles' );
@@ -53,7 +53,7 @@ $status_text   = get_theme_mod( 'geekypress_hero_status_text', 'Contract & Full-
 			<h1 class="wp-block-heading terminal-display hero-title">
 				<span class="hero-title-prefix"><?php echo esc_html( $title_prefix ); ?></span><br>
 				<mark class="hero-title-name"><?php echo esc_html( $name ); ?></mark>
-				<span class="hero-title-surname"><?php echo esc_html( $surname ); ?></span><span>_</span>
+				<span class="hero-title-surname"><?php echo esc_html( $surname ); ?></span><span class="terminal-title-cursor" aria-hidden="true">_</span>
 			</h1>
 
 			<p class="content-text terminal-hero-desc"><?php echo nl2br( esc_html( $desc ) ); ?></p>
@@ -76,7 +76,27 @@ $status_text   = get_theme_mod( 'geekypress_hero_status_text', 'Contract & Full-
 					<span>/ Connect with me</span>
 					<?php foreach ( $socials as $soc ) : ?>
 						<?php if ( ! empty( $soc['url'] ) ) : ?>
-							<a href="<?php echo esc_url( $soc['url'] ); ?>" title="<?php echo esc_attr( isset( $soc['title'] ) ? $soc['title'] : '' ); ?>" <?php echo strpos( $soc['url'], 'http' ) === 0 ? 'target="_blank" rel="noreferrer"' : ''; ?>><?php echo esc_html( isset( $soc['label'] ) ? $soc['label'] : '@' ); ?></a>
+							<?php
+							$soc_title = isset( $soc['title'] ) ? $soc['title'] : '';
+							$soc_icon  = ! empty( $soc['icon'] ) ? $soc['icon'] : '';
+							$soc_label = isset( $soc['label'] ) ? trim( (string) $soc['label'] ) : '';
+
+							// Backwards compatibility: if icon key is empty, normalize legacy label
+							if ( empty( $soc_icon ) && ! empty( $soc_label ) ) {
+								$soc_icon = geekypress_normalize_icon( strtolower( $soc_label ) );
+							}
+							?>
+							<a href="<?php echo esc_url( $soc['url'] ); ?>" title="<?php echo esc_attr( $soc_title ); ?>" <?php echo strpos( $soc['url'], 'http' ) === 0 ? 'target="_blank" rel="noopener noreferrer"' : ''; ?>>
+								<?php
+								if ( ! empty( $soc_icon ) ) {
+									echo geekypress_get_icon( $soc_icon, '', 18 );
+								} elseif ( ! empty( $soc_label ) ) {
+									echo esc_html( $soc_label );
+								} else {
+									echo geekypress_get_icon( 'globe', '', 18 );
+								}
+								?>
+							</a>
 						<?php endif; ?>
 					<?php endforeach; ?>
 				</div>
@@ -99,9 +119,11 @@ $status_text   = get_theme_mod( 'geekypress_hero_status_text', 'Contract & Full-
 						</picture>
 					<?php endif; ?>
 
-					<div class="terminal-json">
-						<strong><?php echo esc_html( $term_cmd ); ?></strong>
-						<pre><?php echo esc_html( $term_json ); ?></pre>
+					<div class="terminal-json" data-cmd="<?php echo esc_attr( $term_cmd ); ?>" data-raw-json="<?php echo esc_attr( $term_json ); ?>">
+						<strong class="terminal-cmd-line">
+							<span class="terminal-cmd-text"><?php echo esc_html( $term_cmd ); ?></span><span class="terminal-cursor" aria-hidden="true">_</span>
+						</strong>
+						<pre class="terminal-json-output"><?php echo esc_html( $term_json ); ?></pre>
 					</div>
 				</div>
 				<div class="terminal-status">

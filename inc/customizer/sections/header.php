@@ -108,3 +108,25 @@ $wp_customize->add_control(
 		'type'        => 'checkbox',
 	)
 );
+
+// Custom Favicon
+$wp_customize->add_setting(
+	'geekypress_favicon',
+	array(
+		'default'           => '',
+		'transport'         => 'refresh',
+		'sanitize_callback' => 'esc_url_raw',
+	)
+);
+$wp_customize->add_control(
+	new WP_Customize_Image_Control(
+		$wp_customize,
+		'geekypress_favicon',
+		array(
+			'label'       => __( 'Site Favicon / App Icon', 'geekypress' ),
+			'description' => __( 'Upload a custom favicon (SVG, PNG, ICO, or WebP). Falls back to WordPress Site Icon or theme SVG icon if left empty.', 'geekypress' ),
+			'section'     => 'geekypress_header',
+		)
+	)
+);
+
