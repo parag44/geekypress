@@ -65,16 +65,6 @@ This theme bundles or uses the following third-party resources:
 * Upgraded Call to Action section with an interactive, responsive terminal contact form.
 * Enabled full WebP image upload and display support across avatar and media library.
 
-= 1.0.1 =
-* Replaced Dashicons with lightweight, zero-dependency inline Lucide SVG icon system.
-* Added interactive SVG icon picker to Terminal Social Links in Customizer.
-* Added live dark / light mode visitor color switcher toggle.
-* Added customizer-controlled Front Page Blog & Articles section.
-* Added single post reading experience with terminal meta HUD and customizer width control.
-* Added dedicated search results and search form templates (`search.php`, `searchform.php`).
-* 100% GDPR and Theme Directory compliance: removed all remote web font requests, relying on locally bundled variable fonts (Geist Mono & Geist Sans) and system monospaces.
-* Removed activation option mutation hook for strict WordPress.org Theme Review guidelines compliance.
-
 = 1.0.0 =
 * Initial public release on WordPress.org.
 * Native Customizer API controls with repeater fields.
