@@ -3,7 +3,7 @@ Contributors: parag44
 Requires at least: 6.6
 Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -21,6 +21,8 @@ Features:
 * Self-hosted local fallback fonts (Geist Sans & Geist Mono).
 * Fully accessible, responsive mobile navigation drawer.
 * Optional frontend terminal boot loader.
+* Hardware-accelerated entrance animations and interactive terminal typing simulation.
+* Built-in Dark and Light color mode with high-contrast accessibility compliance.
 
 == Installation ==
 
@@ -54,12 +56,15 @@ This theme bundles or uses the following third-party resources:
 
 == Changelog ==
 
-= 1.0.2 =
-* Enabled full WebP image upload and display support for profile avatar and media library.
-* Added custom Site Favicon upload control in Customizer with SVG/PNG/ICO/WebP support.
-* Added basic SEO & Social Meta settings in Customizer (meta description, keywords, robots directives, Open Graph, and Twitter Cards).
-* Replaced "Interests & Curiosities" with dynamic "Stats & Metrics" section featuring customizable developer stat cards (50+ projects, 5+ years experience, 100% satisfaction, etc.).
-* Upgraded Call to Action section with an interactive, responsive terminal contact form with Customizer-controlled placeholders and submit actions.
+= 1.1.0 =
+* Added lightweight, zero-dependency scroll-reveal animations across all front-page sections with smooth staggered card entrances.
+* Added interactive terminal `cat developer.json` typing simulation in the Hero terminal profile with progressive line loading.
+* Enhanced button text contrast across both themes: crisp white on forest green in Light Mode, deep high-contrast black on luminous green in Dark Mode.
+* Improved About Me highlight grid with responsive typography, enlarged icons (28px), and cleaner spacing.
+* Added customizable Site Favicon upload control in Customizer with SVG/PNG/ICO/WebP support.
+* Added basic SEO & Social Meta settings in Customizer (meta description, keywords, Open Graph, and Twitter Cards).
+* Upgraded Call to Action section with an interactive, responsive terminal contact form.
+* Enabled full WebP image upload and display support across avatar and media library.
 
 = 1.0.1 =
 * Replaced Dashicons with lightweight, zero-dependency inline Lucide SVG icon system.
