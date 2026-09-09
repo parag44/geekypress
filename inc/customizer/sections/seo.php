@@ -42,7 +42,7 @@ $wp_customize->add_control(
 $wp_customize->add_setting(
 	'geekypress_seo_keywords',
 	array(
-		'default'           => 'software engineer, developer portfolio, full-stack, wordpress, php, typescript, react, open source',
+		'default'           => 'software engineer, developer portfolio, full-stack, WordPress, php, typescript, react, open source',
 		'transport'         => 'postMessage',
 		'sanitize_callback' => 'sanitize_text_field',
 	)

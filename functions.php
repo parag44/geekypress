@@ -142,32 +142,7 @@ function geekypress_animation_body_class( $classes ) {
 }
 add_filter( 'body_class', 'geekypress_animation_body_class' );
 
-/**
- * Ensures WebP images are allowed in the WordPress media uploader.
- *
- * @param array $mimes Allowed MIME types.
- * @return array
- */
-function geekypress_enable_webp_upload( $mimes ) {
-	$mimes['webp'] = 'image/webp';
-	return $mimes;
-}
-add_filter( 'upload_mimes', 'geekypress_enable_webp_upload' );
 
-/**
- * Ensures WebP images are recognized as displayable images by WordPress.
- *
- * @param bool   $result Current displayable result.
- * @param string $path   Path to the image file.
- * @return bool
- */
-function geekypress_displayable_webp( $result, $path ) {
-	if ( false === $result && 'webp' === strtolower( pathinfo( $path, PATHINFO_EXTENSION ) ) ) {
-		return true;
-	}
-	return $result;
-}
-add_filter( 'file_is_displayable_image', 'geekypress_displayable_webp', 10, 2 );
 
 /**
  * Remove the Site Editor admin menu entry.
@@ -463,7 +438,7 @@ function geekypress_render_seo_meta() {
 	}
 
 	$meta_desc = get_theme_mod( 'geekypress_seo_meta_desc', 'Full-stack software engineer portfolio showcasing web applications, open source developer tools, projects, and skills.' );
-	$keywords  = get_theme_mod( 'geekypress_seo_keywords', 'software engineer, developer portfolio, full-stack, wordpress, php, typescript, react, open source' );
+	$keywords  = get_theme_mod( 'geekypress_seo_keywords', 'software engineer, developer portfolio, full-stack, WordPress, php, typescript, react, open source' );
 	$robots    = get_theme_mod( 'geekypress_seo_robots', 'index, follow' );
 	$og_enable = get_theme_mod( 'geekypress_seo_og_enabled', true );
 	$og_image  = get_theme_mod( 'geekypress_seo_og_image', '' );

@@ -63,7 +63,7 @@ This theme bundles or uses the following third-party resources:
 * Added customizable Site Favicon upload control in Customizer with SVG/PNG/ICO/WebP support.
 * Added basic SEO & Social Meta settings in Customizer (meta description, keywords, Open Graph, and Twitter Cards).
 * Upgraded Call to Action section with an interactive, responsive terminal contact form.
-* Enabled full WebP image upload and display support across avatar and media library.
+* Enabled WebP image support across avatar and theme image controls.
 
 = 1.0.0 =
 * Initial public release on WordPress.org.
