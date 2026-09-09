@@ -26,9 +26,9 @@ function geekypress_normalize_icon( $icon_name ) {
 		'dashicons-admin-tools'          => 'wrench',
 		'dashicons-admin-site'           => 'globe',
 		'dashicons-admin-site-alt3'      => 'server',
-		'dashicons-wordpress'            => 'code',
-		'dashicons-wordpress-alt'        => 'globe',
-		'dashicons-editor-code'          => 'file-code',
+		'dashicons-wp-logo'            => 'code',
+		'dashicons-wp-logo-alt'        => 'globe',
+		'dashicons-editor-code'        => 'file-code',
 		'dashicons-desktop'              => 'monitor',
 		'dashicons-laptop'               => 'laptop',
 		'dashicons-smartphone'           => 'smartphone',
@@ -222,7 +222,7 @@ function geekypress_get_icon_paths( $name ) {
 		'copy' => '<rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>',
 		'check' => '<path d="M20 6 9 17l-5-5"></path>',
 		'user' => '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>',
-		'wordpress' => '<circle cx="12" cy="12" r="10"></circle><path d="m8.8 17.5 2.2-6.3c.4-1.1.2-1.9-.3-2.2H8.3L7 11.5h1.2c.5 0 .7.3.7.8l-2.4 7.2c1.4.9 3 1.5 4.8 1.5.9 0 1.8-.1 2.6-.4l-3-9.5c-.1-.3-.2-.5-.2-.7 0-.5.4-.8.9-.8.7 0 1.3.5 1.8 1.2.6.8.9 1.8.9 2.9 0 .8-.2 1.6-.5 2.3l2.8-8.2c.9 1.4 1.5 3 1.5 4.8 0 2.2-.9 4.3-2.3 5.8l3.1-8.9c.2-.5.1-.9-.2-1.2"></path>',
+		'wp-logo' => '<circle cx="12" cy="12" r="10"></circle><path d="m8.8 17.5 2.2-6.3c.4-1.1.2-1.9-.3-2.2H8.3L7 11.5h1.2c.5 0 .7.3.7.8l-2.4 7.2c1.4.9 3 1.5 4.8 1.5.9 0 1.8-.1 2.6-.4l-3-9.5c-.1-.3-.2-.5-.2-.7 0-.5.4-.8.9-.8.7 0 1.3.5 1.8 1.2.6.8.9 1.8.9 2.9 0 .8-.2 1.6-.5 2.3l2.8-8.2c.9 1.4 1.5 3 1.5 4.8 0 2.2-.9 4.3-2.3 5.8l3.1-8.9c.2-.5.1-.9-.2-1.2"></path>',
 		'plane' => '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path>',
 	);
 
@@ -363,7 +363,7 @@ function geekypress_get_icon_catalog() {
 		array( 'slug' => 'message-square',  'label' => 'Chat / Forum' ),
 		array( 'slug' => 'sun',             'label' => 'Sun / Light Mode' ),
 		array( 'slug' => 'moon',            'label' => 'Moon / Dark Mode' ),
-		array( 'slug' => 'wordpress',       'label' => 'WordPress Logo' ),
+		array( 'slug' => 'wp-logo',       'label' => 'WordPress Logo' ),
 		array( 'slug' => 'plane',           'label' => 'Airplane / Travel' ),
 	);
 

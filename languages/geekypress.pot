@@ -209,7 +209,7 @@ msgid "Description / Subtitle"
 msgstr ""
 
 #: inc/customizer/sections/about.php:180
-msgid "Dashicon class (e.g. dashicons-admin-tools, dashicons-wordpress, dashicons-groups, dashicons-performance)"
+msgid "Dashicon class (e.g. dashicons-admin-tools, dashicons-code, dashicons-groups, dashicons-performance)"
 msgstr ""
 
 #: inc/customizer/sections/contact.php:15
@@ -633,7 +633,7 @@ msgid "Skill Name"
 msgstr ""
 
 #: inc/customizer/sections/skills.php:114
-msgid "Dashicon Class (e.g. dashicons-wordpress, dashicons-editor-code, dashicons-admin-tools)"
+msgid "Dashicon Class (e.g. dashicons-code, dashicons-editor-code, dashicons-admin-tools)"
 msgstr ""
 
 #: inc/customizer/sections/typography.php:15
