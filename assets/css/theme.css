@@ -779,8 +779,12 @@ html[data-theme-mode="light"] .gp-theme-icon-moon {
 }
 
 /* View Transitions: Circular Theme Toggle Transition (Top Right) */
+:root {
+  --gp-theme-transition-duration: 2.5s;
+}
+
 ::view-transition-group(root) {
-  animation-duration: 1.5s;
+  animation-duration: var(--gp-theme-transition-duration, 2.5s);
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -789,7 +793,7 @@ html[data-theme-mode="light"] .gp-theme-icon-moon {
   mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><defs><filter id="blur"><feGaussianBlur stdDeviation="2"/></filter></defs><circle cx="40" cy="0" r="18" fill="white" filter="url(%23blur)"/></svg>') top right / 0 no-repeat;
   -webkit-mask-origin: content-box;
   mask-origin: content-box;
-  animation: geekypress-circle-scale 1.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: geekypress-circle-scale var(--gp-theme-transition-duration, 2.5s) cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: top right;
 }
 
@@ -5139,6 +5143,3 @@ body.has-gp-animations #back-to-top:hover {
     opacity: 1 !important;
   }
 }
-
-
-
