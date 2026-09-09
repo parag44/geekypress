@@ -13,7 +13,7 @@ $wp_customize->add_section(
 	'geekypress_typography_section',
 	array(
 		'title'       => __( 'Typography & Geek Fonts', 'geekypress' ),
-		'description' => __( 'Customize developer & monospace fonts for code snippets, terminal window, headings, and body content with live Google Fonts support.', 'geekypress' ),
+		'description' => __( 'Customize developer and monospace fonts for code snippets, terminal window, headings, and body content with bundled variable fonts and local fallbacks.', 'geekypress' ),
 		'panel'       => 'geekypress_theme_panel',
 		'priority'    => 16,
 	)

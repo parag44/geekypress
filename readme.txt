@@ -7,7 +7,7 @@ Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-A programmer-focused portfolio theme featuring interactive terminal aesthetics, native Customizer controls, Google Fonts typography, and developer ligatures.
+A programmer-focused portfolio theme featuring interactive terminal aesthetics, native Customizer controls, bundled developer typography, and programming ligatures.
 
 == Description ==
 
@@ -17,8 +17,7 @@ Features:
 * Out-of-the-box demo data showcasing projects, skills, career timeline, and contact information immediately upon activation.
 * Native WordPress Customizer integration with repeater controls for projects, skills, timeline, stats, and social links.
 * Deep click-to-edit preview linking in the Customizer.
-* Google Fonts integration with developer-centric monospace fonts (Fira Code, JetBrains Mono, Space Mono, and more) and programming ligatures support.
-* Self-hosted local fallback fonts (Geist Sans & Geist Mono).
+* 100% privacy and GDPR compliant typography with self-hosted bundled variable fonts (Geist Sans & Geist Mono) and developer monospaces with programming ligatures support.
 * Fully accessible, responsive mobile navigation drawer.
 * Optional frontend terminal boot loader.
 * Hardware-accelerated entrance animations and interactive terminal typing simulation.

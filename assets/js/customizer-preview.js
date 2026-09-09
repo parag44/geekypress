@@ -60,41 +60,28 @@
 	bindCSSVar('geekypress_color_link', '--pt-link');
 	bindCSSVar('geekypress_color_link_hover', '--pt-link-hover');
 
-	// ── Typography & Google Fonts Live Preview ──
+	// ── Typography Live Preview ──
 	var fontLookup = {
-		'fira-code': { family: '"Fira Code", "Geist Mono", monospace', google: 'Fira+Code:wght@400;500;600;700' },
-		'jetbrains-mono': { family: '"JetBrains Mono", "Geist Mono", monospace', google: 'JetBrains+Mono:wght@400;500;600;700' },
-		'space-mono': { family: '"Space Mono", "Geist Mono", monospace', google: 'Space+Mono:ital,wght@0,400;0,700;1,400' },
-		'source-code-pro': { family: '"Source Code Pro", "Geist Mono", monospace', google: 'Source+Code+Pro:wght@400;600;700' },
-		'inconsolata': { family: '"Inconsolata", "Geist Mono", monospace', google: 'Inconsolata:wght@400;600;700' },
-		'share-tech-mono': { family: '"Share Tech Mono", "Geist Mono", monospace', google: 'Share+Tech+Mono' },
-		'vt323': { family: '"VT323", monospace', google: 'VT323' },
-		'roboto-mono': { family: '"Roboto Mono", monospace', google: 'Roboto+Mono:wght@400;500;700' },
-		'geist-mono': { family: '"Geist Mono", monospace', google: null },
-		'inter': { family: '"Inter", system-ui, sans-serif', google: 'Inter:wght@400;500;600;700' },
-		'space-grotesk': { family: '"Space Grotesk", sans-serif', google: 'Space+Grotesk:wght@400;500;600;700' },
-		'plus-jakarta-sans': { family: '"Plus Jakarta Sans", sans-serif', google: 'Plus+Jakarta+Sans:wght@400;500;600;700' },
-		'outfit': { family: '"Outfit", sans-serif', google: 'Outfit:wght@400;500;600;700' },
-		'geist-sans': { family: '"Geist Sans", system-ui, sans-serif', google: null },
-		'system': { family: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', google: null }
+		'fira-code': { family: '"Fira Code", "Geist Mono", monospace' },
+		'jetbrains-mono': { family: '"JetBrains Mono", "Geist Mono", monospace' },
+		'space-mono': { family: '"Space Mono", "Geist Mono", monospace' },
+		'source-code-pro': { family: '"Source Code Pro", "Geist Mono", monospace' },
+		'inconsolata': { family: '"Inconsolata", "Geist Mono", monospace' },
+		'share-tech-mono': { family: '"Share Tech Mono", "Geist Mono", monospace' },
+		'vt323': { family: '"VT323", monospace' },
+		'roboto-mono': { family: '"Roboto Mono", monospace' },
+		'geist-mono': { family: '"Geist Mono", monospace' },
+		'inter': { family: '"Inter", system-ui, sans-serif' },
+		'space-grotesk': { family: '"Space Grotesk", sans-serif' },
+		'plus-jakarta-sans': { family: '"Plus Jakarta Sans", sans-serif' },
+		'outfit': { family: '"Outfit", sans-serif' },
+		'geist-sans': { family: '"Geist Sans", system-ui, sans-serif' },
+		'system': { family: 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif' }
 	};
-
-	function loadGoogleFontPreview(key) {
-		if (!fontLookup[key] || !fontLookup[key].google) return;
-		var linkId = 'gp-font-preview-' + key;
-		if (!$('#' + linkId).length) {
-			$('<link>', {
-				id: linkId,
-				rel: 'stylesheet',
-				href: 'https://fonts.googleapis.com/css2?family=' + fontLookup[key].google + '&display=swap'
-			}).appendTo('head');
-		}
-	}
 
 	api('geekypress_font_mono', function(value) {
 		value.bind(function(newval) {
 			if (fontLookup[newval]) {
-				loadGoogleFontPreview(newval);
 				document.documentElement.style.setProperty('--font-mono', fontLookup[newval].family);
 			}
 		});
@@ -103,7 +90,6 @@
 	api('geekypress_font_body', function(value) {
 		value.bind(function(newval) {
 			if (fontLookup[newval]) {
-				loadGoogleFontPreview(newval);
 				document.documentElement.style.setProperty('--font-sans', fontLookup[newval].family);
 			}
 		});
