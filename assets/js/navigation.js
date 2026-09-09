@@ -223,12 +223,31 @@
 		var current = document.documentElement.getAttribute('data-theme-mode') || getPreferredTheme();
 		applyTheme(current, false);
 
+		var isThemeTransitioning = false;
 		toggleBtn.addEventListener('click', function(e) {
 			e.preventDefault();
 			e.stopPropagation();
+			if (isThemeTransitioning) {
+				return;
+			}
+
 			var cur = document.documentElement.getAttribute('data-theme-mode') || getPreferredTheme();
 			var next = (cur === 'dark') ? 'light' : 'dark';
-			applyTheme(next, true);
+
+			// Fallback if View Transitions API is unsupported or user prefers reduced motion
+			if (!document.startViewTransition || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+				applyTheme(next, true);
+				return;
+			}
+
+			isThemeTransitioning = true;
+			var transition = document.startViewTransition(function() {
+				applyTheme(next, true);
+			});
+
+			transition.finished.finally(function() {
+				isThemeTransitioning = false;
+			});
 		});
 
 		// Listen for system theme changes if user hasn't overridden
